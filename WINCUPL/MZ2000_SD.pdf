@@ -1,0 +1,159 @@
+{COMPONENT C:\USERS\YANAT\DOCUMENTS\WINCUPL\MZ2000_SD\MZ2000_SD.SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Mon May 09 17:04:35 2022 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P AD7 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P AD6 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P AD5 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P AD4 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P AD3 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P AD2 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P IOREQ {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P RD {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P WD {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P IOWR {Pt "I/O"}{Lq 0}{Ploc 290 20}}
+   {P IORD {Pt "I/O"}{Lq 0}{Ploc 290 40}}
+   {P IOCS {Pt "I/O"}{Lq 0}{Ploc 290 60}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 195 230}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 210}
+   [Ts 15][Tj "RC"]
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
+   [Ts 15][Tj "LC"]
+   {Pnl 270 30}
+   {Pnl 270 50}
+   {Pnl 270 70}
+
+   {Sd A 1 2 3 4 5 6 7 8 9 21 22 23}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 220 260 0}
+   {L 130 200 100 200}
+   {L 130 210 140 200 130 190}
+   {L 130 160 100 160}
+   {L 130 140 100 140}
+   {L 130 120 100 120}
+   {L 130 100 100 100}
+   {L 130 80 100 80}
+   {L 130 60 100 60}
+   {L 130 40 100 40}
+   {L 130 20 100 20}
+   {L 260 20 290 20}
+   {L 260 40 290 40}
+   {L 260 60 290 60}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "AD7" 140 200}
+   {T "AD6" 140 160}
+   {T "AD5" 140 140}
+   {T "AD4" 140 120}
+   {T "AD3" 140 100}
+   {T "AD2" 140 80}
+   {T "IOREQ" 140 60}
+   {T "RD" 140 40}
+   {T "WD" 140 20}
+   [Tj "RC"]
+   {T "IOWR" 250 20}
+   {T "IORD" 250 40}
+   {T "IOCS" 250 60}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "G22V10" 195 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 20}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD C:\USERS\YANAT\DOCUMENTS\WINCUPL\MZ2000_SD\MZ2000_SD 195 220}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N AD7
+   }
+   {N AD6
+   }
+   {N AD5
+   }
+   {N AD4
+   }
+   {N AD3
+   }
+   {N AD2
+   }
+   {N IOREQ
+   }
+   {N RD
+   }
+   {N WD
+   }
+   {N IOWR
+   }
+   {N IORD
+   }
+   {N IOCS
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}

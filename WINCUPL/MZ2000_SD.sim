@@ -1,0 +1,44 @@
+%SIGNAL
+PIN   6 =  AD2 
+PIN   5 =  AD3 
+PIN   4 =  AD4 
+PIN   3 =  AD5 
+PIN   2 =  AD6 
+PIN   1 =  AD7 
+PIN  23 =  IOCS 
+PIN  22 =  IORD 
+PIN   7 =  IOREQ 
+PIN  21 =  IOWR 
+PIN   8 =  RD 
+PIN   9 =  WD 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+IOCS =>
+    IOREQ
+  # AD2
+  # AD3
+  # AD4
+  # !AD5
+  # AD6
+  # !AD7
+
+IORD =>
+    RD
+
+IOWR =>
+    WD
+
+IOCS.oe  =>
+    1 
+
+IORD.oe  =>
+    1 
+
+IOWR.oe  =>
+    1 
+
+%END

@@ -1,0 +1,32 @@
+NAME		MZ2000_SD;
+PARTNO		22V10;
+REVISION	A;
+DATE		21/11/07;
+DESIGNER	None;
+COMPANY       None;
+ASSEMBLY	None;
+LOCATION	None;
+DEVICE		G22V10;
+                                                    
+
+/* INPUTS... */
+Pin   1 = AD7;
+Pin   2 = AD6;
+Pin   3 = AD5;
+Pin   4 = AD4;
+Pin   5 = AD3;
+Pin   6 = AD2;
+Pin   7 = IOREQ;
+Pin   8 = RD;
+Pin   9 = WD;
+
+/* OUTPUTS... */
+Pin 23 = IOCS;
+Pin 22 = IORD;
+Pin 21 = IOWR;
+
+/** Logic **/
+IOWR = WD;
+IORD = RD;
+IOCS = IOREQ # AD2 # AD3 # AD4 # !(AD5) # AD6 # !(AD7);
+

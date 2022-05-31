@@ -2,7 +2,6 @@
 
 ![MZ-2000_SD](https://github.com/yanataka60/MZ80K_SD/blob/main/JPEG/MZ-80K_SD.jpg)
 
-　
 　MZ-80B、MZ-2000でSD-CARDからのアプリケーション起動、BASICなどのアプリケーションからSD-CARDへのロード、セーブを実現するものです。
 
 　MZ-80B、MZ-2000では「/」キーを押しながら電源を入れる、又は「/」キーを押しながらIPLボタンを押すことでI/Oデバイスとして繋いだROMからプログラムを読み込ませて起動する機能があります。

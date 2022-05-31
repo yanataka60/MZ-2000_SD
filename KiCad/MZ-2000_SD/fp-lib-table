@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name MZ2000_SD)(type KiCad)(uri ${KIPRJMOD})(options "")(descr ""))
+  (lib (name mz-2000)(type KiCad)(uri ${KIPRJMOD}/mz-2000.pretty)(options "")(descr ""))
+)
