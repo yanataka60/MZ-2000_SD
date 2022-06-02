@@ -101,12 +101,12 @@
 　　　注2)Arduino Pro MiniはA4、A5ピンも使っています。
 
 ## EXT-ROM
-　まず、BASICからMONITORを抜き出し、バイナリファイルとして保存します。
+　まず、BASICからMONITOR(0000h～128Fh)を抜き出し、バイナリファイルとして保存します。
 
-|機種名|モニタ名|
+|機種名|BASIC名|モニタ名|
 | ------------ | ------------ |
-|MZ-80B|SB-1520|
-|MZ-2000|MZ-1Z001M|
+|MZ-80B|SB-5520|SB-1520|
+|MZ-2000|MZ-1Z001 or MZ-1Z002|MZ-1Z001M|
 
 バイナリエディタで以下の修正をします。
 ### MZ-80B SB-1520
@@ -134,7 +134,11 @@
 |02B3|16 08 ED|C3 0C F8|
 |02BF|16 08 ED|C3 0F F8|
 
-　EXT-ROMフォルダ内にFD_rom1.bin、FD_rom2.bin、FD_rom.binと3つありますが、SD-CARDを利用するためのプログラムFD_rom1.bin(28C64の下位に配置)、MONITORをCMT利用に戻すためのプログラムFD_rom2.bin(28C64の上位に配置)、2つを合わせたプログラムFD_rom.binとなっています。
+　次にZ80/EXT-ROMフォルダ内にEXT-ROM_SD MZ-80B.bin又はEXT-ROM_SD MZ-2000.binをMONITORの後ろ(12A0h～)に付け加えて保存します。(0000h～190Ch)
+
+　
+
+　FD_rom1.bin、FD_rom2.bin、FD_rom.binと3つありますが、SD-CARDを利用するためのプログラムFD_rom1.bin(28C64の下位に配置)、MONITORをCMT利用に戻すためのプログラムFD_rom2.bin(28C64の上位に配置)、2つを合わせたプログラムFD_rom.binとなっています。
 
 　ROMライター(TL866II Plus等)を使って2764又は28C64にFD_rom.binを書き込んでください。
 
