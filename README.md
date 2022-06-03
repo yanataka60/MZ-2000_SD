@@ -6,7 +6,7 @@
 
 　MZ-80B、MZ-2000では「/」キーを押しながら電源を入れる、又は「/」キーを押しながらIPLボタンを押すことでI/Oデバイスとして繋いだROMからプログラムを読み込ませて起動する機能があります。
 
-　この機能を使ってSD-CARDからアプリケーションを起動させる機能を持たせたMONITOR 1Z-1Z001M(SB-1520)をROM起動させます。
+　この機能を使ってSD-CARDからアプリケーションを起動させる機能を持たせたMONITOR SB-1520(MZ-80B)、MONITOR 1Z-1Z001M(MZ-2000)をROM起動させます。
 
 　SD対応MONITORからはFD又はFDLコマンドでSDからアプリケーションをLOAD実行ができます。
 
@@ -51,7 +51,8 @@
 ## 回路図
 　KiCadフォルダ内のMZ-2000_EXT-BOARDフォルダのMZ-2000_EXT-BOARD.pdf、MZ2000_SDフォルダのMZ2000_SD.pdf参照
 
-![回路図](https://github.com/yanataka60/MZ80K_SD/blob/main/KiCad/MZ80k_SD/MZ80K_SD.pdf)
+![回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_EXT-BOARD/MZ-2000_EXT-BOARD.pdf)
+![回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_SD/MZ2000_SD.pdf)
 
 ## 部品
 
