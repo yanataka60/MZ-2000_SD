@@ -1,11 +1,11 @@
-{COMPONENT C:\USERS\YANAT\DOCUMENTS\WINCUPL\MZ2000_SD\MZ2000_SD.SYM
+{COMPONENT C:\USERS\YANAT\DOCUMENTS\WINCUPL\MZ2000_BOOTROM(2)\MZ2000_SD.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Mon May 09 17:04:35 2022 "}
+  {DBtime "Sat Jun 04 09:46:18 2022 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,29 +33,40 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P AD7 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
-   {P AD6 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
-   {P AD5 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
-   {P AD4 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
-   {P AD3 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P AD2 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P AD0 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P AD1 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P AD2 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P AD3 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P AD4 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P AD5 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P AD6 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P AD7 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P RD {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P WR {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
    {P IOREQ {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P RD {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
-   {P WD {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
-   {P IOWR {Pt "I/O"}{Lq 0}{Ploc 290 20}}
-   {P IORD {Pt "I/O"}{Lq 0}{Ploc 290 40}}
-   {P IOCS {Pt "I/O"}{Lq 0}{Ploc 290 60}}
+   {P IOAD15 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P RESET {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P ROMOE {Pt "I/O"}{Lq 0}{Ploc 320 20}}
+   {P ARESET {Pt "I/O"}{Lq 0}{Ploc 320 40}}
+   {P IOCS {Pt "I/O"}{Lq 0}{Ploc 320 60}}
+   {P IOF8WR {Pt "I/O"}{Lq 0}{Ploc 320 80}}
+   {P IOF9RD {Pt "I/O"}{Lq 0}{Ploc 320 100}}
+   {P IOF9WR {Pt "I/O"}{Lq 0}{Ploc 320 120}}
   }
 
   {PKG
    [Ly "REFDES"]
    [Ts 25][Tj "CB"][Tr 0][Tm "N"]
-   {Rdl 195 230}
+   {Rdl 210 310}
 
    [Ly "PINNUM"]
    [Ts 15][Tj "RC"]
-   {Pnl 120 210}
+   {Pnl 120 290}
    [Ts 15][Tj "RC"]
+   {Pnl 120 250}
+   {Pnl 120 230}
+   {Pnl 120 210}
+   {Pnl 120 190}
    {Pnl 120 170}
    {Pnl 120 150}
    {Pnl 120 130}
@@ -65,19 +76,26 @@
    {Pnl 120 50}
    {Pnl 120 30}
    [Ts 15][Tj "LC"]
-   {Pnl 270 30}
-   {Pnl 270 50}
-   {Pnl 270 70}
+   {Pnl 300 30}
+   {Pnl 300 50}
+   {Pnl 300 70}
+   {Pnl 300 90}
+   {Pnl 300 110}
+   {Pnl 300 130}
 
-   {Sd A 1 2 3 4 5 6 7 8 9 21 22 23}
+   {Sd A 1 2 3 4 5 6 7 8 9 10 11 13 14 15 16 19 20 21 22}
   }
 
   {PIC
    [Ly "GATE"]
    [Ts 15][Tj "LC"][Tr 0][Tm "N"]
-   {R 130 220 260 0}
+   {R 130 300 290 0}
+   {L 130 280 100 280}
+   {L 130 290 140 280 130 270}
+   {L 130 240 100 240}
+   {L 130 220 100 220}
    {L 130 200 100 200}
-   {L 130 210 140 200 130 190}
+   {L 130 180 100 180}
    {L 130 160 100 160}
    {L 130 140 100 140}
    {L 130 120 100 120}
@@ -86,27 +104,37 @@
    {L 130 60 100 60}
    {L 130 40 100 40}
    {L 130 20 100 20}
-   {L 260 20 290 20}
-   {L 260 40 290 40}
-   {L 260 60 290 60}
+   {L 290 20 320 20}
+   {L 290 40 320 40}
+   {L 290 60 320 60}
+   {L 290 80 320 80}
+   {L 290 100 320 100}
+   {L 290 120 320 120}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "AD7" 140 200}
-   {T "AD6" 140 160}
-   {T "AD5" 140 140}
-   {T "AD4" 140 120}
-   {T "AD3" 140 100}
-   {T "AD2" 140 80}
+   {T "AD0" 140 280}
+   {T "AD1" 140 240}
+   {T "AD2" 140 220}
+   {T "AD3" 140 200}
+   {T "AD4" 140 180}
+   {T "AD5" 140 160}
+   {T "AD6" 140 140}
+   {T "AD7" 140 120}
+   {T "RD" 140 100}
+   {T "WR" 140 80}
    {T "IOREQ" 140 60}
-   {T "RD" 140 40}
-   {T "WD" 140 20}
+   {T "IOAD15" 140 40}
+   {T "RESET" 140 20}
    [Tj "RC"]
-   {T "IOWR" 250 20}
-   {T "IORD" 250 40}
-   {T "IOCS" 250 60}
+   {T "ROMOE" 280 20}
+   {T "ARESET" 280 40}
+   {T "IOCS" 280 60}
+   {T "IOF8WR" 280 80}
+   {T "IOF9RD" 280 100}
+   {T "IOF9WR" 280 120}
    [Ly "DEVICE"]
    [Tj "CT"]
-   {T "G22V10" 195 -10}
+   {T "G22V10" 210 -10}
   }
 
   {ATR
@@ -117,7 +145,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\USERS\YANAT\DOCUMENTS\WINCUPL\MZ2000_SD\MZ2000_SD 195 220}
+    {At PLD C:\USERS\YANAT\DOCUMENTS\WINCUPL\MZ2000_BOOTROM(2)\MZ2000_SD 210 300}
    }
   }
  }
@@ -127,29 +155,43 @@
   }
 
   {NET_DEF
-   {N AD7
+   {N AD0
    }
-   {N AD6
-   }
-   {N AD5
-   }
-   {N AD4
-   }
-   {N AD3
+   {N AD1
    }
    {N AD2
    }
-   {N IOREQ
+   {N AD3
+   }
+   {N AD4
+   }
+   {N AD5
+   }
+   {N AD6
+   }
+   {N AD7
    }
    {N RD
    }
-   {N WD
+   {N WR
    }
-   {N IOWR
+   {N IOREQ
    }
-   {N IORD
+   {N IOAD15
+   }
+   {N RESET
+   }
+   {N ROMOE
+   }
+   {N ARESET
    }
    {N IOCS
+   }
+   {N IOF8WR
+   }
+   {N IOF9RD
+   }
+   {N IOF9WR
    }
   }
 

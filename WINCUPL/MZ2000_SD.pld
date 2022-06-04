@@ -1,7 +1,7 @@
 NAME		MZ2000_SD;
 PARTNO		22V10;
 REVISION	A;
-DATE		21/11/07;
+DATE		22/5/13;
 DESIGNER	None;
 COMPANY       None;
 ASSEMBLY	None;
@@ -10,23 +10,34 @@ DEVICE		G22V10;
                                                     
 
 /* INPUTS... */
-Pin   1 = AD7;
-Pin   2 = AD6;
-Pin   3 = AD5;
-Pin   4 = AD4;
-Pin   5 = AD3;
-Pin   6 = AD2;
-Pin   7 = IOREQ;
-Pin   8 = RD;
-Pin   9 = WD;
+Pin   1 = AD0;
+Pin   2 = AD1;
+Pin   3 = AD2;
+Pin   4 = AD3;
+Pin   5 = AD4;
+Pin   6 = AD5;
+Pin   7 = AD6;
+Pin   8 = AD7;
+Pin   9 = RD;
+Pin  10 = WR;
+Pin  11 = IOREQ;
+Pin  13 = IOAD15;
+Pin  14 = RESET;
 
 /* OUTPUTS... */
-Pin 23 = IOCS;
-Pin 22 = IORD;
-Pin 21 = IOWR;
+Pin 22 = IOF9WR;
+Pin 21 = IOF9RD;
+Pin 20 = IOF8WR;
+Pin 19 = IOCS;
+Pin 16 = ARESET;
+Pin 15 = ROMOE;
 
 /** Logic **/
-IOWR = WD;
-IORD = RD;
+IOFX = AD1 # AD2 # !(AD3) # !(AD4) # !(AD5) # !(AD6) # !(AD7);
+IOF9WR = WR # IOREQ # !(AD0) # IOFX;
+IOF9RD = RD # IOREQ # !(AD0) # IOFX;
+IOF8WR = WR # IOREQ #  AD0 # IOFX;
+ROMOE = !(IOAD15);
 IOCS = IOREQ # AD2 # AD3 # AD4 # !(AD5) # AD6 # !(AD7);
+ARESET = !(RESET);
 

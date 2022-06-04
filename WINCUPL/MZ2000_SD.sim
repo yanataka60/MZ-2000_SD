@@ -1,22 +1,32 @@
 %SIGNAL
-PIN   6 =  AD2 
-PIN   5 =  AD3 
-PIN   4 =  AD4 
-PIN   3 =  AD5 
-PIN   2 =  AD6 
-PIN   1 =  AD7 
-PIN  23 =  IOCS 
-PIN  22 =  IORD 
-PIN   7 =  IOREQ 
-PIN  21 =  IOWR 
-PIN   8 =  RD 
-PIN   9 =  WD 
+PIN   1 =  AD0 
+PIN   2 =  AD1 
+PIN   3 =  AD2 
+PIN   4 =  AD3 
+PIN   5 =  AD4 
+PIN   6 =  AD5 
+PIN   7 =  AD6 
+PIN   8 =  AD7 
+PIN  16 =  ARESET 
+PIN  13 =  IOAD15 
+PIN  19 =  IOCS 
+PIN  20 =  IOF8WR 
+PIN  21 =  IOF9RD 
+PIN  22 =  IOF9WR 
+PIN  11 =  IOREQ 
+PIN   9 =  RD 
+PIN  14 =  RESET 
+PIN  15 =  ROMOE 
+PIN  10 =  WR 
 %END
 
 %FIELD
 %END
 
 %EQUATION
+ARESET =>
+    !RESET
+
 IOCS =>
     IOREQ
   # AD2
@@ -26,19 +36,73 @@ IOCS =>
   # AD6
   # !AD7
 
-IORD =>
-    RD
+IOF8WR =>
+    WR
+  # IOREQ
+  # AD0
+  # AD1
+  # AD2
+  # !AD3
+  # !AD4
+  # !AD5
+  # !AD6
+  # !AD7
 
-IOWR =>
-    WD
+IOF9RD =>
+    RD
+  # IOREQ
+  # !AD0
+  # AD1
+  # AD2
+  # !AD3
+  # !AD4
+  # !AD5
+  # !AD6
+  # !AD7
+
+IOF9WR =>
+    WR
+  # IOREQ
+  # !AD0
+  # AD1
+  # AD2
+  # !AD3
+  # !AD4
+  # !AD5
+  # !AD6
+  # !AD7
+
+IOFX =>
+    AD1
+  # AD2
+  # !AD3
+  # !AD4
+  # !AD5
+  # !AD6
+  # !AD7
+
+ROMOE =>
+    !IOAD15
+
+ARESET.oe  =>
+    1 
 
 IOCS.oe  =>
     1 
 
-IORD.oe  =>
+IOF8WR.oe  =>
     1 
 
-IOWR.oe  =>
+IOF9RD.oe  =>
+    1 
+
+IOF9WR.oe  =>
+    1 
+
+RESET.oe  =>
+    0 
+
+ROMOE.oe  =>
     1 
 
 %END
