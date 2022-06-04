@@ -37,7 +37,6 @@
 |アプリケーション名|備考|
 | ------------ | ------------ |
 |BASIC SB-5520 ||
-|BASIC SB-5520 コンパイラ||
 |MZ-LISP       |I/O '85/3月号|
 |FORTRAN       |I/O別冊MZ-80B活用研究|
 |S-OS SWORD TAPE版|Oh!MZ '86/2月号|
