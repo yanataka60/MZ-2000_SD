@@ -96,12 +96,6 @@
 
 　長さは50～70mmあれば前面まで持ってこられます。
 
-![EXT_CONNECT_1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_1.JPG)
-![EXT_CONNECT_2](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_2.JPG)
-![EXT_CONNECT_3](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_3.JPG)
-![EXT_CONNECT_4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_4.JPG)
-![EXT_CONNECT_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_5.JPG)
-
 #### EXPANSION UNITを使わない場合
 ・2.54mmピッチ2x25Pinフラットケーブル、ただし片側はカードエッジコネクタ
 
@@ -110,13 +104,6 @@
 ・2.54mmピッチ2x25Pinフラットケーブル
 
 　重ねた基板を接続するだけなので10mm以上の長さがあれば十分です。
-
-![DIRECT_CONNECT_1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_1.JPG)
-![DIRECT_CONNECT_2](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_2.JPG)
-![DIRECT_CONNECT_3](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_3.JPG)
-![DIRECT_CONNECT_4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_4.JPG)
-![DIRECT_CONNECT_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_5.JPG)
-![DIRECT_CONNECT_6](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_6.JPG)
 
 ## GAL22V10への書込み
 　WINCUPLファルダのMZ2000_SD.jedをROMライター(TL866II Plus等)を使ってGAL22V10に書き込んでください。
@@ -155,7 +142,7 @@
 |02B3|16 08 ED|C3 0C F8|
 |02BF|16 08 ED|C3 0F F8|
 
-　次にEXT-ROMフォルダ内のEXT-ROM_SD MZ-80B.bin又はEXT-ROM_SD MZ-2000.binをMONITORの後ろ(12A0h～)に付け加えて保存します。(0000h～190Ch)
+　次にEXT-ROMフォルダ内のEXT-ROM_SD MZ-80B.bin又はEXT-ROM_SD MZ-2000.binをMONITORの後ろ(12A0h～)に付け加えて保存します。出来上がるバイナリファイルは0000h～190Chとなるはずです。
 
 　出来上がったバイナリファイルをROMライター(TL866II Plus等)を使って27C256に書き込んでください。
 
@@ -182,7 +169,7 @@
 
 　MZ-80K_SDでソケットを使用して差込式にしているのであればそのままMZ-2000_SDに差して使えます。
 
-　Arduino IDEを使ってMZ-80KリポジトリArduinoフォルダ内のMZ-80K_SD.inoを書き込みます。
+　Arduino IDEを使ってMZ-80Kリポジトリ Arduinoフォルダ内のMZ-80K_SD.inoを書き込みます。
 
 　SdFatライブラリを使用していますのでArduino IDEメニューのライブラリの管理からライブラリマネージャを立ち上げて「SdFat」をインストールしてください。
 
@@ -192,12 +179,25 @@
 ### MZ-80B、MZ-2000、MZ-2200、MZ-2500の拡張スロットに差し込む
 　EXT-BOARDは、10cmx10cmにするために拡張カードとしては寸足らずです。右側をガイドスロットに沿って差し込めるように設計しています。
 
-　MZ-2000_SDへのフラットケーブルは真ん中のJ2に差してください。
+　インタフェース基板からMZ-2000_SDへのフラットケーブルは真ん中のJ2に差してください。
+
+![EXT_CONNECT_1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_1.JPG)
+![EXT_CONNECT_2](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_2.JPG)
+![EXT_CONNECT_3](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_3.JPG)
+![EXT_CONNECT_4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_4.JPG)
+![EXT_CONNECT_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_5.JPG)
 
 ### MZ-2000のEXPANSION UNITを使わずに接続する場合
 　EXT-BOARDのカードエッジ反対側のJ5と本体のカードエッジを接続します。
 
-　MZ-2000_SDへのフラットケーブルは真ん中のJ2に差してください。
+　インタフェース基板からMZ-2000_SDへのフラットケーブルは真ん中のJ2に差してください。
+
+![DIRECT_CONNECT_1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_1.JPG)
+![DIRECT_CONNECT_2](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_2.JPG)
+![DIRECT_CONNECT_3](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_3.JPG)
+![DIRECT_CONNECT_4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_4.JPG)
+![DIRECT_CONNECT_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_5.JPG)
+![DIRECT_CONNECT_6](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_6.JPG)
 
 ### MZ-2500の拡張ユニットが無く、本体内部のコネクタに接続する場合
 　MZ-2000_SDと本体内部のコネクタを単純にPinケーブルで接続するとA、B面が逆転してしまうため動作しません。MZ-2000_SDのコネクタを裏面にハンダ付けするか、変換アダプタを自作して接続してください。
