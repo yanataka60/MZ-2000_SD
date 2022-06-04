@@ -118,6 +118,9 @@
 ![DIRECT_CONNECT_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_5.JPG)
 ![DIRECT_CONNECT_6](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_6.JPG)
 
+## GAL22V10への書込み
+　WINCUPLファルダのMZ2000_SD.jedをROMライター(TL866II Plus等)を使ってGAL22V10に書き込んでください。
+
 ## ROMへの書込み
 　まず、BASICからMONITOR(0000h～128Fh)を抜き出し、バイナリファイルとして保存します。
 
