@@ -196,10 +196,12 @@
 ![EXT_CONNECT_4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_4.JPG)
 ![EXT_CONNECT_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_5.JPG)
 
-### MZ-2200 EXPANSION UNIT
-　新たに入手したMZ-2200 EXPANSION UNITにインタフェース基板を挿入しようとしたところ、若干のズレがあり挿入できませんでした。
+### MZ-2200、MZ-80B、MZ-2500拡張スロットへの抜き差しに苦労する場合
+　MZ-2200 EXPANSION UNITにインタフェース基板を挿入しようとしたところ、抜き差しが非常に硬く苦労する個体がありました。
 
-　当方ではMZ-80B、MZ-2500の両機種においても拡張スロットへの挿入を試していませんのでもし挿入できなかった場合には画像の部分を少し削ってみたください。
+　開発ではMZ-2000 EXPANSION UNITでのスムーズな抜き差しを確認していますが、抜き差しに苦労する場合には画像の部分をほんの少しヤスリ掛け(4～5回)するだけでかなりスムーズになりますのでお試しください。
+
+![Adjustment](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/Adjustment%20place.jpg)
 
 ### MZ-2000のEXPANSION UNITを使わずに接続する場合
 　インタフェース基板のカードエッジ反対側のJ5と本体のカードエッジを接続します。
