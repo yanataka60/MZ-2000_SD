@@ -446,14 +446,7 @@ FDL BASIC S[CR]
 　次にAPP_BASIC_LISP_SDフォルダ内のAPP_BASIC_LISP_SD_MZ-LISP_80B.bin又はAPP_BASIC_LISP_SD_MZ-LISP_2000.binをMZTアドレス3FA0h(実アドレス3F20h)から付け加えて保存します。(MZTファイル0000h～4530h)
 
 ### S-OS SWORD TAPE版
-バイナリエディタで以下の修正をします。
-#### MZ-80B版
-|MZT ADDRESS|実ADDRESS|修正前|修正後|
-| ------------ | ------------ | ------------ | ------------ |
-|002B|132B|11|10|
-|0C6B|1F6B|FF|EF|
-
-#### MZ-2000版
+MZ-80B版、MZ-2000版ともバイナリエディタで以下の修正をします。
 |MZT ADDRESS|実ADDRESS|修正前|修正後|
 | ------------ | ------------ | ------------ | ------------ |
 |0C6B|1F6B|FF|EF|
