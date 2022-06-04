@@ -188,11 +188,6 @@
 ### MZ-80B、MZ-2000、MZ-2200、MZ-2500の拡張スロットに差し込む
 　インタフェース基板は、安価に発注するために10cmx10cmで設計しているのでMZ-80B、MZ-2000の拡張カードとしては寸足らずです。右側をガイドスロットに沿って差し込めるように設計しています。
 
-** MZ-2200 EXPANSION UNIT **
-　新たに入手したMZ-2200 EXPANSION UNITにインタフェース基板を挿入しようとしたところ、若干のズレがあり挿入できませんでした。
-
-　当方ではMZ-80B、MZ-2500の両機種においても拡張スロットへの挿入を試していませんのでもし挿入できなかった場合には画像の部分を少し削ってみたください。
-
 　インタフェース基板からMZ-2000_SDへのフラットケーブルは真ん中のJ2に差してください。
 
 ![EXT_CONNECT_1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_1.JPG)
@@ -200,6 +195,11 @@
 ![EXT_CONNECT_3](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_3.JPG)
 ![EXT_CONNECT_4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_4.JPG)
 ![EXT_CONNECT_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_5.JPG)
+
+#### MZ-2200 EXPANSION UNIT
+　新たに入手したMZ-2200 EXPANSION UNITにインタフェース基板を挿入しようとしたところ、若干のズレがあり挿入できませんでした。
+
+　当方ではMZ-80B、MZ-2500の両機種においても拡張スロットへの挿入を試していませんのでもし挿入できなかった場合には画像の部分を少し削ってみたください。
 
 ### MZ-2000のEXPANSION UNITを使わずに接続する場合
 　インタフェース基板のカードエッジ反対側のJ5と本体のカードエッジを接続します。
