@@ -51,7 +51,7 @@
 ## 回路図
 　MZ-2000_SDは、インタフェース基板とSD-CARD UNIT基板の2枚構成となっています。
 
-　KiCadフォルダ内のMZ-2000_EXT-BOARDフォルダのMZ-2000_EXT-BOARD.pdf、MZ2000_SDフォルダのMZ2000_SD.pdf参照
+　KiCadフォルダ内のMZ-2000_EXT-BOARDフォルダのMZ-2000_EXT-BOARD.pdf、MZ2000_SDフォルダのMZ2000_SD.pdfを参照してください。
 
 ![インタフェース基板回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_EXT-BOARD/MZ-2000_EXT-BOARD.pdf)
 ![EXT-BOARD](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2000_EXT-BOARD_schematic.jpg)
@@ -83,14 +83,20 @@
 |S1|3Pスライドスイッチ|1|秋月電子通商 SS12D01G4など|
 
 ### その他必要なもの
-　フラットケーブルですが、基板は2x22Pinで設計していますが、2.54mmピッチ2x22Pinフラットケーブルが手に入りにくいので2.54mmピッチ2x25Pinフラットケーブルで代用しています。
+　基板のコネクタは2x22Pinで設計していますが、2.54mmピッチ2x22Pinフラットケーブルが手に入りにくいので2.54mmピッチ2x25Pinフラットケーブルで代用しています。
 
 　2.54mmピッチ2x22Pinフラットケーブルが手に入るようであればそちらをお使いください。
 
-#### 拡張スロットに挿入して使用する場合
+#### EXPANSION UNITの拡張スロットに挿入して使用する場合
 ・2.54mmピッチ2x25Pinフラットケーブル
 
 　長さは50～70mmあれば前面まで持ってこられます。
+
+![EXT_CONNECT_1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_1.JPG)
+![EXT_CONNECT_2](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_2.JPG)
+![EXT_CONNECT_3](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_3.JPG)
+![EXT_CONNECT_4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_4.JPG)
+![EXT_CONNECT_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_5.JPG)
 
 #### EXPANSION UNITを使わない場合
 ・2.54mmピッチ2x25Pinフラットケーブル、ただし片側はカードエッジコネクタ
