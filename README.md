@@ -361,6 +361,8 @@ FDL BASIC S[CR]
 
 　次にAPP_BASIC_LISP_SDフォルダ内のAPP_BASIC_LISP_SD_SB-5520.binをMZTアドレス5280h(実アドレス5200h)から付け加えて保存します。(MZTファイル0000h～5810h)
 
+　SD対応でフリーエリアが44268Byteから42664Byteに減少します。
+
 #### MZ-2000 MZ-1Z001
 バイナリエディタで以下の修正をします。フリーエリアの修正箇所はI/O '83/5月号「MZ-2000 BASICの拡張」を参考にしています。
 |MZT ADDRESS|実ADDRESS|修正前|修正後|
@@ -387,6 +389,8 @@ FDL BASIC S[CR]
 
 　次にAPP_BASIC_LISP_SDフォルダ内のAPP_BASIC_LISP_SD_MZ-1Z001.binをMZTアドレス5580h(実アドレス5500h)から付け加えて保存します。(MZTファイル0000h～5B10h)
 
+　SD対応でフリーエリアが43500Byteから41896Byteに減少します。
+
 #### MZ-2000 MZ-1Z002
 バイナリエディタで以下の修正をします。フリーエリアの修正箇所はI/O '83/5月号「MZ-2000 BASICの拡張」を参考にしています。
 |MZT ADDRESS|実ADDRESS|修正前|修正後|
@@ -412,6 +416,8 @@ FDL BASIC S[CR]
 |3F72|3EF2|5C 65   |A0 6B   |
 
 　次にAPP_BASIC_LISP_SDフォルダ内のAPP_BASIC_LISP_SD_MZ-1Z002.binをMZTアドレス6680h(実アドレス6600h)から付け加えて保存します。(MZTファイル0000h～6C10h)
+
+　SD対応でフリーエリアが39148Byteから37544Byteに減少します。
 
 #### BASICをEXT-ROMから起動させる
 　27C512を使えば二つのバイナリファイルを切り替えて使うような使い方ができるので一つをSD対応MONITOR、一つをROM起動SD対応BASICとすればアプリケーションランチャーとスイッチオンBASICを切り替えて使うことができます。
