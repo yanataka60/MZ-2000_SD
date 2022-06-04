@@ -82,6 +82,10 @@
 |C2-C7|積層セラミックコンデンサ 0.1uF|6||
 |S1|3Pスライドスイッチ|1|秋月電子通商 SS12D01G4など|
 
+　　　注1)秋月電子通商　AE-microSD-LLCNVのJ1ジャンパはショートしてください。
+
+　　　注2)Arduino Pro MiniはA4、A5ピンも使っています。
+
 ### その他必要なもの
 　基板のコネクタは2x22Pinで設計していますが、2.54mmピッチ2x22Pinフラットケーブルが手に入りにくいので2.54mmピッチ2x25Pinフラットケーブルで代用しています。
 
@@ -107,10 +111,12 @@
 
 　重ねた基板を接続するだけなので10mm以上の長さがあれば十分です。
 
-
-　　　注1)秋月電子通商　AE-microSD-LLCNVのJ1ジャンパはショートしてください。
-
-　　　注2)Arduino Pro MiniはA4、A5ピンも使っています。
+![DIRECT_CONNECT_1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_1.JPG)
+![DIRECT_CONNECT_2](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_2.JPG)
+![DIRECT_CONNECT_3](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_3.JPG)
+![DIRECT_CONNECT_4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_4.JPG)
+![DIRECT_CONNECT_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_5.JPG)
+![DIRECT_CONNECT_6](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_6.JPG)
 
 ## ROMへの書込み
 　まず、BASICからMONITOR(0000h～128Fh)を抜き出し、バイナリファイルとして保存します。
