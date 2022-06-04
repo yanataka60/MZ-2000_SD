@@ -196,7 +196,7 @@
 ![EXT_CONNECT_4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_4.JPG)
 ![EXT_CONNECT_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/EXT_CONNECT_5.JPG)
 
-#### MZ-2200 EXPANSION UNIT
+### MZ-2200 EXPANSION UNIT
 　新たに入手したMZ-2200 EXPANSION UNITにインタフェース基板を挿入しようとしたところ、若干のズレがあり挿入できませんでした。
 
 　当方ではMZ-80B、MZ-2500の両機種においても拡張スロットへの挿入を試していませんのでもし挿入できなかった場合には画像の部分を少し削ってみたください。
