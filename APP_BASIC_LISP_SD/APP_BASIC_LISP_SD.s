@@ -43,6 +43,7 @@ ENT:
 ;		ORG		5500H     ;BASIC MZ-1Z001
 ;		ORG		6600H     ;BASIC MZ-1Z002
 ;		ORG		3F20H     ;MZ-LISP 80B or 2000
+;		ORG		0F800H    ;DISK BASIC MZ-2Z002
 
 ;******************** MONITOR CMTÉãÅ[É`Éìë„ë÷ *************************************
 ENT1:	JP		MSHED

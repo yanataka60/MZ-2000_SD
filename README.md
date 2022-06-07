@@ -436,6 +436,17 @@ FDL BASIC S[CR]
 
 　SD対応でフリーエリアが39148Byteから37544Byteに減少します。
 
+#### MZ-2000、MZ-2200 MZ-2Z002
+APP_BASIC_LISP_SDフォルダ内のAPP_BASIC_LISP_SD_MZ-2Z002.wavとMZ-2Z002 SD.BAS.wavをカセットテープに録音します。
+
+DISK BASIC MZ-2Z002を起動し、Filing CMTを使ってカセットテープに録音したAPP_BASIC_LISP_SD_MZ-2Z002.wavをFDに保存します。ファイル名は「SD.bin」となります。
+
+次にLOAD/Tコマンドでカセットテープに録音したMZ-2Z002 SD.BAS.wavをFDに保存します。ファイル名は取り敢えず「SD.BAS」とします。
+
+最後に現在のAUTO RUNをリネーム又は削除してから「SD.BAS」を「AUTO RUN」にリネームします。これで起動時にSD対応となります。
+
+　SD対応でフリーエリアが30956Byteから29161Byteに減少します。
+
 #### BASICをEXT-ROMから起動させる
 　27C512を使えば二つのバイナリファイルを切り替えて使う使い方ができるのでSD対応MONITORとROM起動SD対応BASICを切り替えて使うこともできます。
 
@@ -546,3 +557,7 @@ MZ-80B版、MZ-2000、MZ-2200版ともバイナリエディタで以下の修正
 2022.6.6
 
 部品表中、ROMについて追記。
+
+2022.6.7
+
+DISK BASIC MZ-2Z002のSD対応を追加しました。
