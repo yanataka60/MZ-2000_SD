@@ -217,6 +217,22 @@
 ![DIRECT_CONNECT_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_5.JPG)
 ![DIRECT_CONNECT_6](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_6.JPG)
 
+#### カードエッジコネクタを使う
+　変則的ではありますが、インタフェース基板に基板用カードエッジコネクタのピンを曲げて付けてみました。
+
+　カードエッジコネクタを基板にハンダ付けすると上面、下面が逆になってしまいますのでカードエッジコネクタは基板の裏面に付ける必要があります。
+
+　カードエッジコネクタB列のピンは90度曲げることでそのままハンダ付けできますが、A列のピンは空中に浮いてしまいますので手配線する必要があります。
+
+　また、MZ-2000本体のカードエッジに挿す時には、基板を逆さまに挿しますのでフラットケーブルが邪魔になって結構斜めになっています。
+
+　ちょっと強引な付け方になりますので試される方は自己責任でお願いします。
+
+![DIRECT_CONNECT_7](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_7.JPG)
+![DIRECT_CONNECT_8](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_8.JPG)
+![DIRECT_CONNECT_9](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_9.JPG)
+![DIRECT_CONNECT_10](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_10.JPG)
+
 ### MZ-2500の拡張ユニットが無く、本体内部のコネクタに接続する場合
 　MZ-2000_SDと本体内部のコネクタを単純にPinケーブルで接続するとA、B面が逆転してしまうため動作しません。MZ-2000_SDのコネクタを裏面にハンダ付けするか、変換アダプタを自作して接続してください。
 
@@ -631,3 +647,7 @@ q-Pascalコンパイラの対応を追加しました。
 2022.8.4
 
 Arduinoを基板に直付けしている場合、Arduinoプログラムを書き込むときの注意点を書き加えました。
+
+2022.8.8
+
+EXPANSION UNITを使わずに接続する別の方法を追加しました。
