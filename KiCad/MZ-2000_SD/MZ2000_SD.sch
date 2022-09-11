@@ -6,7 +6,7 @@ encoding utf-8
 Sheet 1 1
 Title "MZ-2000_SD"
 Date ""
-Rev "Rev2.2"
+Rev "Rev2.3"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -1384,4 +1384,47 @@ Text Label 2000 9500 0    50   ~ 0
 D0
 Wire Wire Line
 	2650 9200 2900 9200
+Text Label 12950 3450 0    50   ~ 0
+SCK
+Text Label 12950 3550 0    50   ~ 0
+MISO
+Text Label 12950 3650 0    50   ~ 0
+MOSI
+Text Label 12950 3750 0    50   ~ 0
+CS
+$Comp
+L Connector_Generic:Conn_01x06 J3
+U 1 1 62C204C0
+P 14050 4600
+F 0 "J3" H 14130 4592 50  0000 L CNN
+F 1 "MicroSD Card Adapter" H 13650 4100 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x06_P2.54mm_Vertical" H 14050 4600 50  0001 C CNN
+F 3 "~" H 14050 4600 50  0001 C CNN
+	1    14050 4600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	13850 4400 13650 4400
+Wire Wire Line
+	13850 4500 13650 4500
+Wire Wire Line
+	13850 4600 13650 4600
+Wire Wire Line
+	13850 4700 13650 4700
+Wire Wire Line
+	13850 4800 13650 4800
+Wire Wire Line
+	13850 4900 13650 4900
+Text Label 13650 4400 0    50   ~ 0
+GND
+Text Label 13650 4500 0    50   ~ 0
++5V
+Text Label 13650 4600 0    50   ~ 0
+MISO
+Text Label 13650 4700 0    50   ~ 0
+MOSI
+Text Label 13650 4800 0    50   ~ 0
+SCK
+Text Label 13650 4900 0    50   ~ 0
+CS
 $EndSCHEMATC
