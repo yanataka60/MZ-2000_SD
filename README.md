@@ -684,3 +684,7 @@ Arduinoを基板に直付けしている場合、Arduinoプログラムを書き
 2022.8.8
 
 EXPANSION UNITを使わずに接続する別の方法を追加しました。
+
+2022.9.11
+
+MicroSD Card Adapter用の端子を付加し、基板をRev2.3に更新。
