@@ -70,7 +70,9 @@
 |番号|品名|数量|備考|
 | ------------ | ------------ | ------------ | ------------ |
 |J1|2x22Pinコネクタ|1|秋月電子通商 PH-2x40RGなど|
+||J2、J5のいずれか|||
 |J2|Micro_SD_Card_Kit|1|秋月電子通商 AE-microSD-LLCNV (注1)|
+|J5|MicroSD Card Adapter|1|Arduino等に使われる5V電源に対応したもの ((注3))|
 |U1,U2|74LS273|2||
 |U3|8255|1||
 |U4|Arduino_Pro_Mini_5V|1|(注2)|
@@ -84,6 +86,37 @@
 　　　注1)秋月電子通商　AE-microSD-LLCNVのJ1ジャンパはショートしてください。
 
 　　　注2)Arduino Pro MiniはA4、A5ピンも使っています。
+
+　　　注3)Arduino等に使われる5V電源に対応したMicroSD Card Adapterも正しく信号を繋げば使えるとご報告いただきました。
+
+### MicroSD Card Adapterを使う(Rev2.3)
+J5にハンダ付けします。
+
+MicroSD Card Adapterについているピンヘッダを除去してハンダ付けするのが一番確実ですが、J5の穴にMicroSD Card Adapterをぴったりと押しつけ、裏から多めにハンダを流し込むことでハンダ付けをする方法もあります。なお、この方法の時にはしっかりハンダ付けが出来たかテスターで確認しておいた方が安心です。
+
+ハンダ付けに自信のない方はJ2の秋月電子通商　AE-microSD-LLCNVをお使いください。AE-microSD-LLCNVならパワーLED、アクセスLEDが付いています。
+
+![MicroSD Card Adapter1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MicroSD%20Card%20Adapter(1).JPG)
+
+![MicroSD Card Adapter2](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MicroSD%20Card%20Adapter(2).JPG)
+
+![MicroSD Card Adapter3](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MicroSD%20Card%20Adapter(3).JPG)
+
+![MicroSD Card Adapter4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MicroSD%20Card%20Adapter(4).JPG)
+
+
+### MicroSD Card Adapterを使う(Rev2.2)
+以下のピン番号を参考に変換基板等繋ぎ方は適宜対応してください。
+|AE-microSD-LLCNVピン番号|MicroSD Card Adapterピン番号|信号名|
+| ---------------------- | -------------------------- | ---- |
+|1|2|5V|
+|4|1|GND|
+|5|5|SCK|
+|6|3|MISO|
+|7|4|MOSI|
+|8|6|CS|
+
+![MicroSD Card Adapter](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MicroSD%20Card%20Adapter.jpg)
 
 ### その他必要なもの
 　基板のコネクタは2x22Pinで設計していますが、2.54mmピッチ2x22Pinフラットケーブルが手に入りにくいので2.54mmピッチ2x25Pinフラットケーブルで代用しています。
