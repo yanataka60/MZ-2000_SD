@@ -72,9 +72,9 @@
 |番号|品名|数量|備考|
 | ------------ | ------------ | ------------ | ------------ |
 |J1|2x22Pinコネクタ|1|秋月電子通商 PH-2x40RGなど|
-||J2、J5のいずれか|||
+||J2、J3のいずれか|||
 |J2|Micro_SD_Card_Kit|1|秋月電子通商 AE-microSD-LLCNV (注1)|
-|J5|MicroSD Card Adapter|1|Arduino等に使われる5V電源に対応したもの (注3)|
+|J3|MicroSD Card Adapter|1|Arduino等に使われる5V電源に対応したもの (注3)|
 |U1,U2|74LS273|2||
 |U3|8255|1||
 |U4|Arduino_Pro_Mini_5V|1|(注2)|
