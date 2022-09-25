@@ -291,7 +291,7 @@ MZ-80B本体後ろからカバーを開け、メインボードに二つ並ん�
 
 ![MZ-80B_EXT_BOARD(2)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(2).JPG)
 
-MZ-80B本体内部の拡張I/Oポート用電源から5V電源を供給すれば扱いが楽になります。
+MZ-80B本体内部の拡張I/Oポート用電源から5V電源を供給すれば扱いが楽です。
 
 ![MZ-80B_EXT_BOARD(3)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(3).JPG)
 
@@ -299,7 +299,7 @@ MZ-80B本体内部の拡張I/Oポート用電源から5V電源を供給すれば
 
 ![MZ-80B_EXT_BOARD(5)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(5).JPG)
 
-後日、MZ-80B用拡張I/Oポートが手に入ればMZ-80Bインタフェース基板のカードエッジ側を拡張I/Oポートに挿すこともできます。
+MZ-80B用拡張I/Oポートが手に入ったときにはMZ-80Bインタフェース基板のカードエッジ側を拡張I/Oポートに挿してください。
 
 ![MZ-80B_EXT_BOARD(6)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(6).JPG)
 
