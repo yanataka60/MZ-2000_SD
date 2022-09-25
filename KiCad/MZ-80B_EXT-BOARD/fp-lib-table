@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name MZ-80B_EXT-BOARD)(type KiCad)(uri ${KIPRJMOD})(options "")(descr ""))
+  (lib (name mz-80b)(type KiCad)(uri ${KIPRJMOD}/mz-80b.pretty)(options "")(descr ""))
+)
