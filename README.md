@@ -287,7 +287,7 @@ MZ-80Bインターフェース基板のJ3にケーブルを接続しますが一
 
 ![MZ-80B_EXT_BOARD(1)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(1).JPG)
 
-MZ-80B本体後ろからカバーを開け、メインボードに二つ並んでいる2x20Pinコネクタのうち手前の2x20PinコネクタにMZ-80Bインターフェース基板を札込みます。ピンの位置を確認してずれて挿すことのないように装着します。
+MZ-80B本体後ろからカバーを開け、メインボードに二つ並んでいる2x20Pinコネクタのうち手前の2x20PinコネクタにMZ-80Bインターフェース基板を挿し込みます。ピンの位置を確認してずれて挿すことのないように装着します。
 
 ![MZ-80B_EXT_BOARD(2)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(2).JPG)
 
