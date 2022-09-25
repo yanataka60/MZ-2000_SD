@@ -50,6 +50,8 @@
 ## 回路図
 　MZ-2000_SDは、インタフェース基板とSD-CARD UNIT基板の2枚構成となっています。
 
+　注)MZ-80Bに拡張I/Oポートが装備されていない場合の接続方法については後述「MZ-80Bの拡張I/Oポートを使わずに接続する場合」を参照してください。
+
 　KiCadフォルダ内のMZ-2000_EXT-BOARDフォルダのMZ-2000_EXT-BOARD.pdf、MZ2000_SDフォルダのMZ2000_SD.pdfを参照してください。
 
 [インタフェース基板回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_EXT-BOARD/MZ-2000_EXT-BOARD.pdf)
@@ -265,6 +267,41 @@ MicroSD Card Adapterについているピンヘッダを除去してハンダ付
 ![DIRECT_CONNECT_8](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_8.JPG)
 ![DIRECT_CONNECT_9](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_9.JPG)
 ![DIRECT_CONNECT_10](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/DIRECT_CONNECT_10.JPG)
+
+### MZ-80Bの拡張I/Oポートを使わずに接続する場合
+　MZ-80Bに拡張I/Oポートが装備されていない場合には、MZ-80B用のインタフェース基板を使用します。
+
+[MZ-80Bインタフェース基板回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-80B_EXT-BOARD/mz-80b.pdf)
+![MZ-80B_EXT-BOARD](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT-BOARD_schematic.jpg)
+
+|番号|品名|数量|備考|
+| ------------ | ------------ | ------------ | ------------ |
+|J2|2x22Pinコネクタ|1|秋月電子通商 PH-2x40SGなど|
+|J3|1Pinコネクタ|1|秋月電子通商 FHU-1x42SGなど|
+|J4|DCジャック|1|秋月電子通商 MJ-179PHなど(J3により5Vを供給すれば特に必要はありません)|
+|J5|2x20Pinソケット|1|秋月電子通商 FHU-2x42SGなど|
+|S1|3Pスライドスイッチ|1|秋月電子通商 SS12D01G4など(J3により5Vを供給すれば特に必要はありません)|
+||2.54mmピッチ2x25Pinフラットケーブル|1|長さは50～70cm(手に入れば2x22Pin)|
+
+MZ-80Bインターフェース基板のJ3にケーブルを接続しますが一回反転させてMZ-8000_SDに繋いでください。
+
+![MZ-80B_EXT_BOARD(1)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(1).JPG)
+
+MZ-80B本体後ろからカバーを開け、メインボードに二つ並んでいる2x20Pinコネクタのうち手前の2x20PinコネクタにMZ-80Bインターフェース基板を札込みます。ピンの位置を確認してずれて挿すことのないように装着します。
+
+![MZ-80B_EXT_BOARD(2)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(2).JPG)
+
+MZ-80B本体内部の拡張I/Oポート用電源から5V電源を供給すれば扱いが楽になります。
+
+![MZ-80B_EXT_BOARD(3)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(3).JPG)
+
+![MZ-80B_EXT_BOARD(4)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(4).JPG)
+
+![MZ-80B_EXT_BOARD(5)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(5).JPG)
+
+後日、MZ-80B用拡張I/Oポートが手に入ればMZ-80Bインタフェース基板のカードエッジ側を拡張I/Oポートに挿すこともできます。
+
+![MZ-80B_EXT_BOARD(6)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(6).JPG)
 
 ### MZ-2500の拡張ユニットが無く、本体内部のコネクタに接続する場合
 　MZ-2000_SDと本体内部のコネクタを単純にPinケーブルで接続するとA、B面が逆転してしまうため動作しません。MZ-2000_SDのコネクタを裏面にハンダ付けするか、変換アダプタを自作して接続してください。
@@ -688,3 +725,7 @@ EXPANSION UNITを使わずに接続する別の方法を追加しました。
 2022.9.11
 
 MicroSD Card Adapter用の端子を付加し、基板をRev2.3に更新。
+
+2022.9.25
+
+「MZ-80Bの拡張I/Oポートを使わずに接続する場合」を追記しました。
