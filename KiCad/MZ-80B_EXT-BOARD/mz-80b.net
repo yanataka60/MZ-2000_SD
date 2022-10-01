@@ -1,11 +1,11 @@
 (export (version D)
   (design
     (source C:\Users\yanat\Documents\GitHub\MZ-2000_SD\KiCad\MZ-80B_EXT-BOARD\mz-80b.sch)
-    (date "2022/09/16 9:39:09")
+    (date "2022/10/01 16:13:56")
     (tool "Eeschema (5.1.9)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
-        (title MZ-2000_EXT-BOARD)
+        (title MZ-80B_EXT-BOARD)
         (company)
         (rev Rev1.0)
         (date)

@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:\Users\yanat\Documents\GitHub\MZ-2000_SD\KiCad\MZ-2000_EXT-BOARD\mz-2000.sch)
-    (date "2022/06/14 16:58:37")
+    (date "2022/10/01 16:11:15")
     (tool "Eeschema (5.1.9)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -302,7 +302,7 @@
       (node (ref J1) (pin b18))
       (node (ref J5) (pin a22))
       (node (ref J2) (pin b18)))
-    (net (code 40) (name /Φ)
+    (net (code 40) (name /phi)
       (node (ref J2) (pin b7))
       (node (ref J5) (pin b22))
       (node (ref J1) (pin b7)))

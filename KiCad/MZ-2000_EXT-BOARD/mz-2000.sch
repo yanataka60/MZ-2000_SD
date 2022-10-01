@@ -227,7 +227,7 @@ Text Label 2350 2000 0    50   ~ 0
 Text Label 2350 1900 0    50   ~ 0
 ~M1
 Text Label 2350 1800 0    50   ~ 0
-Φ
+phi
 Text Label 2350 1700 0    50   ~ 0
 D7
 Text Label 2350 1600 0    50   ~ 0
@@ -628,7 +628,7 @@ Text Label 4050 4600 0    50   ~ 0
 Text Label 4050 4700 0    50   ~ 0
 ~EXRESET
 Text Label 4750 4700 0    50   ~ 0
-Φ
+phi
 Wire Wire Line
 	2350 5800 2600 5800
 Text Label 2350 2900 0    50   ~ 0
@@ -678,5 +678,5 @@ D2
 Text Label 4750 2600 0    50   ~ 0
 D0
 Text Label 2350 4300 0    50   ~ 0
-Φ
+phi
 $EndSCHEMATC
