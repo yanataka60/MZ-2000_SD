@@ -1,0 +1,27 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 128kRAM
+D 256k FRAM nonvolatile memory, SOIC-28
+K FRAM 5V Parallel
+F http://www.cypress.com/file/136521/download
+$ENDCMP
+#
+$CMP 256kRAM
+D 256k FRAM nonvolatile memory, SOIC-28
+K FRAM 5V Parallel
+F http://www.cypress.com/file/136521/download
+$ENDCMP
+#
+$CMP FM1808B-SG
+D 256k FRAM nonvolatile memory, SOIC-28
+K FRAM 5V Parallel
+F http://www.cypress.com/file/136521/download
+$ENDCMP
+#
+$CMP FM1808B-SG_copy
+D 256k FRAM nonvolatile memory, SOIC-28
+K FRAM 5V Parallel
+F http://www.cypress.com/file/136521/download
+$ENDCMP
+#
+#End Doc Library
