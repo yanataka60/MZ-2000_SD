@@ -106,6 +106,28 @@
 ![MZ-2000_SD](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_33_schematic.jpg)
 ![Rev3.3](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_33.jpg)
 
+### MZ-2000_SD(SD-CARD UNIT基板)Rev4.3
+　EXT-BOARDとSD-CARD UNIT基板Rev3.3を1枚の基板とした拡張スロット装着専用の基板となります。
+
+　MZ-2000、MZ-2200ならEXPANSION UNIT、MZ-80Bなら拡張I/Oポート、MZ-2500なら拡張ユニットが必要です。
+
+　MZ-2000_SD(SD-CARD UNIT基板)Rev2.xのU5 GAL22V10が以下の部品に置き換わっています。以下の部品以外はMZ-2000_SD(SD-CARD UNIT基板)Rev2.xの説明を参照してください。
+
+　ただし、J1はカードエッジになっていますので「2x22Pinコネクタ」は必要なく、またEXT-BOARDを必要としないのでフラットケーブルも不要です。
+
+|番号|品名|数量|備考|
+| ------------ | ------------ | ------------ | ------------ |
+|U5 U7|74LS04|2||
+|U8 U11|74LS30|2||
+|U10|74LS10|1||
+
+#### Rev4.3回路図
+[SD-CARD UNIT基板回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_SD_4_3/MZ2000_SD_43.pdf)
+![MZ-2000_SD](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_43_schematic.jpg)
+![Rev4.3(1)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_43(1).JPG)
+![Rev4.3(2)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_43(2).JPG)
+![Rev4.3(3)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_43(3).JPG)
+
 ### MicroSD Card Adapterを使う(Rev2.3 Rev3.3)
 J3に取り付けます。
 
@@ -768,3 +790,7 @@ TS-1000、TS-2000、q-Pascalコンパイラにおいてカセットテープを�
 2022.12.10
 
 GAL22V10をTTLに置き換えたMZ-2000_SD(SD-CARD UNIT基板)Rev3.3を追加しました。
+
+2022.12.20
+
+拡張スロット装着専用としたMZ-2000_SD(SD-CARD UNIT基板)Rev4.3を追加しました。
