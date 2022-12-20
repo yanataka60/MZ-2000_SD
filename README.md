@@ -100,6 +100,7 @@
 |U5 U7|74LS04|2||
 |U8 U11|74LS30|2||
 |U10|74LS10|1||
+|C8-C11|積層セラミックコンデンサ 0.1uF|4||
 
 #### Rev3.3回路図
 [SD-CARD UNIT基板回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_SD_3_3/MZ2000_SD_33.pdf)
@@ -111,15 +112,33 @@
 
 　MZ-2000、MZ-2200ならEXPANSION UNIT、MZ-80Bなら拡張I/Oポート、MZ-2500なら拡張ユニットが必要です。
 
-　MZ-2000_SD(SD-CARD UNIT基板)Rev2.xのU5 GAL22V10が以下の部品に置き換わっています。以下の部品以外はMZ-2000_SD(SD-CARD UNIT基板)Rev2.xの説明を参照してください。
+　MZ-2000_SD(SD-CARD UNIT基板)Rev2.xのU5 GAL22V10がTTLに置き換わっています。
 
-　ただし、J1はカードエッジになっていますので「2x22Pinコネクタ」は必要なく、またEXT-BOARDを必要としないのでフラットケーブルも不要です。
+　また、J1はカードエッジになっていますので「2x22Pinコネクタ」は必要なく、EXT-BOARDを必要としないのでフラットケーブルも不要です。
 
 |番号|品名|数量|備考|
 | ------------ | ------------ | ------------ | ------------ |
-|U5 U7|74LS04|2||
-|U8 U11|74LS30|2||
-|U10|74LS10|1||
+||J5、J6のいずれか|||
+|J5|Micro_SD_Card_Kit|1|秋月電子通商 AE-microSD-LLCNV (注1)|
+|J6|MicroSD Card Adapter|1|Arduino等に使われる5V電源に対応したもの (注3)|
+|U1,U2|74LS04|2||
+|U3,U4|74LS30|2||
+|U5|74LS10|1||
+|U6,U7|74LS273|2||
+|U8|74LS245|1||
+|U9|27256/29C256/27512/27C512相当品|1|27256/29C256を使うときは、S1を5V側にして使うこと。28C256はピン配置が違うので使えません。|
+|U10|8255|1||
+|U11|Arduino_Pro_Mini_5V|1|(注2)|
+|C1|電解コンデンサ 16v100uF|1||
+|C2-C11|積層セラミックコンデンサ 0.1uF|10||
+|S2|3Pスライドスイッチ|1|秋月電子通商 SS12D01G4など|
+
+　　　注1)秋月電子通商　AE-microSD-LLCNVのJ1ジャンパはショートしてください。
+
+　　　注2)Arduino Pro MiniはA4、A5ピンも使っています。
+
+　　　注3)Arduino等に使われる5V電源に対応したMicroSD Card Adapterも正しく信号を繋げば使えるとご報告いただきました。
+
 
 #### Rev4.3回路図
 [SD-CARD UNIT基板回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_SD_4_3/MZ2000_SD_43.pdf)
