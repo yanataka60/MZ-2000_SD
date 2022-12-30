@@ -1,0 +1,105 @@
+			  Z80 ASSEMBLER - ZASM VER 1.6
+  06A2                	KNUMBS		EQU		06A2H
+  06A4                	GETL		EQU		06A4H
+  0A2E                	LETLN		EQU		0A2EH
+  0889                	MSGPR		EQU		0889H
+  0832                	GETKEY		EQU		0832H
+  0562                	BREAK		EQU		0562H
+  05F3                	PRTBYT		EQU		05F3H
+  08C6                	PRNT		EQU		08C6H
+  08C6                	DISPCH		EQU		08C6H
+  08C6                	DPCT		EQU		08C6H
+  1140                	IBUFE		EQU		1140H
+  1141                	FNAME		EQU		1141H
+  1152                	EADRS		EQU		1152H
+  1152                	FSIZE		EQU		1152H
+  1154                	SADRS		EQU		1154H
+  1156                	EXEAD		EQU		1156H
+  11D1                	DSPX		EQU		11D1H
+  00B1                	MONITOR		EQU		00B1H
+                      	;MZ-80B SB-1520用
+  1093                	LBUF		EQU		1093H
+  109D                	MBUF		EQU		109DH
+                      	;MZ-2000 MZ-1Z001M用
+                      	;LBUF		EQU		10ABH
+                      	;MBUF		EQU		10B6H
+                      	
+                      	
+                      	;0A0H PORTA 送信データ(下位4ビット)
+                      	;0A1H PORTB 受信データ(8ビット)
+                      	;
+                      	;0A2H PORTC Bit
+                      	;7 IN  CHK
+                      	;6 IN
+                      	;5 IN
+                      	;4 IN 
+                      	;3 OUT
+                      	;2 OUT FLG
+                      	;1 OUT
+                      	;0 OUT
+                      	;
+                      	;0A3H コントロールレジスタ
+                      	
+                      	
+  1200                	        ORG		1200H
+                      	
+  1200                	FSIZE2		DS		2
+  1202                	SADRS2		DS		2
+  1204                	EXEAD2		DS		2
+                      	
+  1206                	SDLOAD:
+                      	;START ADRESSが0000Hでないならスタックポインタを1140Hに戻す。
+  1206  210212        			LD		HL,SADRS2
+  1209  7E            			LD		A,(HL)
+  120A  23            			INC		HL
+  120B  B6            			OR		(HL)
+  120C  2803          			JR		Z,SDLD1
+  120E  314011        			LD		SP,1140H
+  1211                	SDLD1:	
+  1211  CD1812        			CALL	DBRCV      ;データ受信
+  1214  2A0412        			LD		HL,(EXEAD2)
+  1217  E9            			JP		(HL)
+                      	
+                      	;データ受信
+  1218  ED5B0012      	DBRCV:	LD		DE,(FSIZE2)
+  121C  2A0212        			LD		HL,(SADRS2)
+  121F  CD2A12        	DBRLOP:	CALL	RCVBYTE
+  1222  77            			LD		(HL),A
+  1223  1B            			DEC		DE
+  1224  7A            			LD		A,D
+  1225  B3            			OR		E
+  1226  23            			INC		HL
+  1227  20F6          			JR		NZ,DBRLOP   ;DE=0までLOOP
+  1229  C9            			RET
+                      	
+                      	
+                      	;**** 1BYTE受信 ****
+                      	;受信DATAをAレジスタにセットしてリターン
+  122A                	RCVBYTE:
+  122A  CD3D12        			CALL	F1CHK      ;PORTC BIT7が1になるまでLOOP
+  122D  DBA1          			IN		A,(0A1H)   ;PORTB -> A
+  122F  F5            			PUSH 	AF
+  1230  3E05          			LD		A,05H
+  1232  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 1
+  1234  CD4412        			CALL	F2CHK      ;PORTC BIT7が0になるまでLOOP
+  1237  3E04          			LD		A,04H
+  1239  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 0
+  123B  F1            			POP 	AF
+  123C  C9            			RET
+                      			
+                      	;**** BUSYをCHECK(1) ****
+                      	; 82H BIT7が1になるまでLOP
+  123D  DBA2          	F1CHK:	IN		A,(0A2H)
+  123F  E680          			AND		80H        ;PORTC BIT7 = 1?
+  1241  28FA          			JR		Z,F1CHK
+  1243  C9            			RET
+                      	
+                      	;**** BUSYをCHECK(0) ****
+                      	; 82H BIT7が0になるまでLOOP
+  1244  DBA2          	F2CHK:	IN		A,(0A2H)
+  1246  E680          			AND		80H        ;PORTC BIT7 = 0?
+  1248  20FA          			JR		NZ,F2CHK
+  124A  C9            			RET
+                      	
+  124B                			END
+
