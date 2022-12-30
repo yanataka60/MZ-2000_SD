@@ -820,4 +820,4 @@ GAL22V10をTTLに置き換えたMZ-2000_SD(SD-CARD UNIT基板)Rev3.3を追加し
 
 2022.12.30
 
-MZ-80B用ゲーム「COSMO ODYSSEY」に対応。読み込みスタートアドレスが12A0H以降であればFFFFHまで読み込み可能にした。
+MZ-80B用ゲーム「COSMO ODYSSEY」に対応。読み込みスタートアドレスが12A0H以降であればFFFFHまで読み込み可能にしました。
