@@ -234,9 +234,7 @@ MicroSD Card Adapterについているピンヘッダを除去してハンダ付
 |02B3|16 08 ED|C3 0C F8|
 |02BF|16 08 ED|C3 0F F8|
 
-　次にEXT-ROMフォルダ内のEXT-ROM_SD MZ-80B.bin又はEXT-ROM_SD MZ-2000.binをMONITORの後ろ(12A0h～)に付け加えて保存します。出来上がるバイナリファイルは0000h～190Chとなるはずです。
-
-　なお、MZ-80Bの場合にEXT-ROMフォルダ内のEXT-ROM_SD MZ-80B_NEW.binをMONITORの後ろ(12A0h～)に付け加えて保存することで従来の読み込み可能範囲0000H～F7FFH以外に読み込みスタートアドレスが12A0H以降だった場合にはFFFFHまで読み込むことができます。
+　次にEXT-ROMフォルダ内のEXT-ROM_SD MZ-80B.bin又はEXT-ROM_SD MZ-2000.binをMONITORの後ろ(12A0h～)に付け加えて保存します。出来上がるバイナリファイルは0000h～198Ehとなるはずです。
 
 　出来上がったバイナリファイルをROMライター(TL866II Plus等)を使って27C256に書き込んでください。
 
