@@ -1,0 +1,222 @@
+			  Z80 ASSEMBLER - ZASM VER 1.6
+                      	;0A0H PORTA 送信データ(下位4ビット)
+                      	;0A1H PORTB 受信データ(8ビット)
+                      	;
+                      	;0A2H PORTC Bit
+                      	;7 IN  CHK
+                      	;6 IN
+                      	;5 IN
+                      	;4 IN 
+                      	;3 OUT
+                      	;2 OUT FLG
+                      	;1 OUT
+                      	;0 OUT
+                      	;
+                      	;0A3H コントロールレジスタ
+                      	
+                      	
+  0000                	        ORG		0000H
+                      	
+  0000  00            			NOP
+  0001  C3007E        			JP		INIT
+                      	
+  7E00                			ORG		7E00H
+                      	
+                      	;**** 8255初期化 ****
+                      	;PORTC下位BITをOUTPUT、上位BITをINPUT、PORTBをINPUT、PORTAをOUTPUT
+  7E00  31FFFF        	INIT:	LD		SP,0FFFFH
+  7E03  3E8A          			LD		A,8AH
+  7E05  D3A3          			OUT		(0A3H),A
+                      	;出力BITをリセット
+  7E07  3E00          	INIT2:	LD		A,00H      ;PORTA <- 0
+  7E09  D3A0          			OUT		(0A0H),A
+  7E0B  D3A2          			OUT		(0A2H),A   ;PORTC <- 0
+                      	
+  7E0D                	START:	
+  7E0D  3E95          			LD		A,95H      ;BOOTコマンド95H
+  7E0F  CDE47E        			CALL	STCD       ;コマンドコード送信
+  7E12  A7            			AND		A          ;00以外ならERROR
+  7E13  C2517E        			JP		NZ,ERR
+                      	
+  7E16  216B7E        			LD		HL,FNAME   ;ファイルネーム送信「@BOOT-x.bin」
+  7E19  CDEB7E        			CALL	STFS
+  7E1C  A7            			AND		A          ;00以外ならERROR
+  7E1D  C2517E        			JP		NZ,ERR
+                      	
+  7E20  CDA17E        			CALL	RCVBYTE    ;状態取得(00H=OK)
+  7E23  A7            			AND		A          ;00以外ならERROR
+  7E24  C2517E        			JP		NZ,ERR
+                      	
+  7E27  3E1C          			LD		A,1CH
+  7E29  32497F        			LD		(CURX),A
+  7E2C  3E0C          			LD		A,0CH
+  7E2E  324A7F        			LD		(CURY),A
+  7E31  21637E        			LD		HL,MSG1    ;LOADING @BOOT-x.bin表示
+  7E34  CD107F        			CALL	STRPR
+                      	
+  7E37  CDA17E        			CALL	RCVBYTE    ;ファイルサイズ下位バイト受信
+  7E3A  5F            			LD		E,A
+  7E3B  CDA17E        			CALL	RCVBYTE    ;ファイルサイズ上位バイト受信
+  7E3E  57            			LD		D,A
+  7E3F  210000        			LD		HL,0000H
+  7E42  CDA17E        	LOP1:	CALL	RCVBYTE    ;ファイルサイズ分データ受信
+  7E45  77            			LD		(HL),A
+  7E46  23            			INC		HL
+  7E47  E5            			PUSH	HL
+  7E48  AF            			XOR		A
+  7E49  ED52          			SBC		HL,DE
+  7E4B  E1            			POP		HL
+  7E4C  20F4          			JR		NZ,LOP1
+  7E4E  C30000        			JP		0000H      ;0000Hからスタート
+                      	
+  7E51  3E1C          	ERR:	LD		A,1CH
+  7E53  32497F        			LD		(CURX),A
+  7E56  3E0C          			LD		A,0CH
+  7E58  324A7F        			LD		(CURY),A
+  7E5B  218C7E        			LD		HL,MSG2    ;エラー表示
+  7E5E  CD107F        			CALL	STRPR
+  7E61  18EE          			JR		ERR
+                      	
+  7E63  4C4F4144494E47	MSG1:	DB		'LOADING '
+                      	
+  7E6B  40424F4F542D41	FNAME	DB		'@BOOT-A.bin',00H,00H,00H,00H,00H,00H,00H,00H,00H
+                      	;FNAME	DB		'@BOOT-B.bin',00H,00H,00H,00H,00H,00H,00H,00H,00H
+  7E7F  00000000000000			DB		00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H
+                      	
+  7E8C  20202020202053	MSG2:	DB		'      SD ERROR      ',00H
+                      	
+                      	;**** 1BYTE受信 ****
+                      	;受信DATAをAレジスタにセットしてリターン
+  7EA1                	RCVBYTE:
+  7EA1  CDD67E        			CALL	F1CHK      ;PORTC BIT7が1になるまでLOOP
+  7EA4  DBA1          			IN		A,(0A1H)   ;PORTB -> A
+  7EA6  F5            			PUSH 	AF
+  7EA7  3E05          			LD		A,05H
+  7EA9  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 1
+  7EAB  CDDD7E        			CALL	F2CHK      ;PORTC BIT7が0になるまでLOOP
+  7EAE  3E04          			LD		A,04H
+  7EB0  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 0
+  7EB2  F1            			POP 	AF
+  7EB3  C9            			RET
+                      			
+                      	;**** 1BYTE送信 ****
+                      	;Aレジスタの内容をPORTA下位4BITに4BITずつ送信
+  7EB4                	SNDBYTE:
+  7EB4  F5            			PUSH	AF
+  7EB5  1F            			RRA
+  7EB6  1F            			RRA
+  7EB7  1F            			RRA
+  7EB8  1F            			RRA
+  7EB9  E60F          			AND		0FH
+  7EBB  CDC57E        			CALL	SND4BIT
+  7EBE  F1            			POP		AF
+  7EBF  E60F          			AND		0FH
+  7EC1  CDC57E        			CALL	SND4BIT
+  7EC4  C9            			RET
+                      	
+                      	;**** 4BIT送信 ****
+                      	;Aレジスタ下位4ビットを送信する
+  7EC5                	SND4BIT:
+  7EC5  D3A0          			OUT		(0A0H),A
+  7EC7  3E05          			LD		A,05H
+  7EC9  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 1
+  7ECB  CDD67E        			CALL	F1CHK      ;PORTC BIT7が1になるまでLOOP
+  7ECE  3E04          			LD		A,04H
+  7ED0  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 0
+  7ED2  CDDD7E        			CALL	F2CHK
+  7ED5  C9            			RET
+                      			
+                      	;**** BUSYをCHECK(1) ****
+                      	; 82H BIT7が1になるまでLOP
+  7ED6  DBA2          	F1CHK:	IN		A,(0A2H)
+  7ED8  E680          			AND		80H        ;PORTC BIT7 = 1?
+  7EDA  28FA          			JR		Z,F1CHK
+  7EDC  C9            			RET
+                      	
+                      	;**** BUSYをCHECK(0) ****
+                      	; 82H BIT7が0になるまでLOOP
+  7EDD  DBA2          	F2CHK:	IN		A,(0A2H)
+  7EDF  E680          			AND		80H        ;PORTC BIT7 = 0?
+  7EE1  20FA          			JR		NZ,F2CHK
+  7EE3  C9            			RET
+                      	
+                      	;**** コマンド送信 (IN:A コマンドコード)****
+  7EE4  CDB47E        	STCD:	CALL	SNDBYTE    ;Aレジスタのコマンドコードを送信
+  7EE7  CDA17E        			CALL	RCVBYTE    ;状態取得(00H=OK)
+  7EEA  C9            			RET
+                      	
+                      	;**** ファイルネーム送信(IN:HL ファイルネームの先頭) ******
+  7EEB  0620          	STFS:	LD		B,20H
+  7EED  7E            	STFS1:	LD		A,(HL)     ;FNAME送信
+  7EEE  CDB47E        			CALL	SNDBYTE
+  7EF1  23            			INC		HL
+  7EF2  05            			DEC		B
+  7EF3  20F8          			JR		NZ,STFS1
+  7EF5  3E0D          			LD		A,0DH
+  7EF7  CDB47E        			CALL	SNDBYTE
+  7EFA  CDA17E        			CALL	RCVBYTE    ;状態取得(00H=OK)
+  7EFD  C9            			RET
+                      	
+                      	;V-RAM アクセスON
+  7EFE  F5            	VRAMON:	PUSH	AF
+  7EFF  DBE8          			IN		A,(0E8H)
+  7F01  F6C0          			OR		0C0H
+  7F03  D3E8          			OUT		(0E8H),A
+  7F05  F1            			POP		AF
+  7F06  C9            			RET
+                      	
+                      	;V-RAMアクセスOFF
+  7F07  F5            	VRAMOF:	PUSH	AF
+  7F08  DBE8          			IN		A,(0E8H)
+  7F0A  E67F          			AND		7FH
+  7F0C  D3E8          			OUT		(0E8H),A
+  7F0E  F1            			POP		AF
+  7F0F  C9            			RET
+                      	
+                      	;文字列を表示
+  7F10  7E            	STRPR:	LD		A,(HL)
+  7F11  FE00          			CP		00H
+  7F13  C8            			RET		Z
+  7F14  CD1A7F        			CALL	PRINT
+  7F17  23            			INC		HL
+  7F18  18F6          			JR		STRPR
+                      	
+                      	;Aレジスタの内容をASCIIコードとしてCURX,Yの位置に表示
+  7F1A  E5            	PRINT:	PUSH	HL
+  7F1B  F5            			PUSH	AF
+  7F1C  CD307F        			CALL	CALXY
+  7F1F  F1            			POP		AF
+  7F20  CDFE7E        			CALL	VRAMON
+  7F23  77            			LD		(HL),A
+  7F24  CDFE7E        			CALL	VRAMON
+  7F27  3A497F        			LD		A,(CURX)
+  7F2A  3C            			INC		A
+  7F2B  32497F        			LD		(CURX),A
+  7F2E  E1            			POP		HL
+  7F2F  C9            			RET
+                      			
+                      	;CURX,YからV-RAMアドレスを算出
+  7F30  D5            	CALXY:	PUSH	DE
+  7F31  C5            			PUSH	BC
+  7F32  21B0CF        			LD		HL,0D000H-50H
+  7F35  3A4A7F        			LD		A,(CURY)
+  7F38  3C            			INC		A
+  7F39  47            			LD		B,A
+  7F3A  1600          			LD		D,00H
+  7F3C  1E50          			LD		E,50H
+  7F3E  19            	CALXY1:	ADD		HL,DE
+  7F3F  10FD          			DJNZ	CALXY1
+  7F41  3A497F        			LD		A,(CURX)
+  7F44  5F            			LD		E,A
+  7F45  19            			ADD		HL,DE
+  7F46  C1            			POP		BC
+  7F47  D1            			POP		DE
+  7F48  C9            			RET
+                      			
+  7F49  00            	CURX:	DB		00H
+  7F4A  00            	CURY:	DB		00H
+                      	
+  7FFF                			ORG		7FFFH
+  7FFF  00            			DB		00H
+  8000                			END
+
