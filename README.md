@@ -391,6 +391,17 @@ MZ-80B用拡張I/Oポートが手に入ったときにはMZ-80Bインタフェ�
 ![MZ-2500_1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_1.jpg)
 ![MZ-2500_2](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_2.jpg)
 
+　変換アダプタは、MZ-2000 EXT-BOARDか、MZ-80B EXT-BOARDのどちらかで自作できます。
+
+　EXT-BOARD基板の長さではケースにあたってしまうので若干カットします。
+
+　カードエッジ部を挟み込むように25x2PinピンソケットをEXT-BOARD基板の表面からみて左側に3x2Pinがはみ出すようにハンダ付けします。
+
+　EXT-BOARD基板の裏面に22x2Pinピンヘッダをつけて出来上がりです。
+
+![MZ-2500_1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_3.jpg)
+![MZ-2500_2](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_4.jpg)
+
 ## 外部電源
 　EXPANSION UNITを使わずにMZ-2000、MZ-2200本体に接続する場合は、本体側カードエッジには5Vが出ていないため、外部電源が必要となります。
 
@@ -859,3 +870,5 @@ MZ-2500のZ80PIOとI/Oアドレスがぶつかっており、MZ-2500モードで
 2023.6.19
 
 従来のBASICから抽出したMONITORを修正してROMに書き込む方式以外に「BASICから抽出したMONITORを修正したバイナリファイル」をSD-CARDから読み込むプログラムをROMに書き込む方式を追加した。
+
+MZ-2500で拡張ユニットが無く、変換アダプタを自作するときの例を追加。
