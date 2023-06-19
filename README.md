@@ -269,6 +269,24 @@ MicroSD Card Adapterについているピンヘッダを除去してハンダ付
 
 　12　実行開始アドレスにJUMPする。
 
+### ROMにBOOT LOADERを書き込む方式の追加(2023.6.19)
+　前述のBASICからMONITORを抜き出してROMに書き込む方式は、自分が所有しているBASICから抜き出してROMに書き込むには問題が無いのですが、書き込み済みROMの配布はSHARPの著作権があるので出来ません。
+
+　そこで「@BOOT-A.bin」というバイナリファイルをSD-CARDから読み込み起動するプログラムをROMに書き込む方式を追加しました。
+
+　ROMに27256を使えば「@BOOT-A.bin」、27512を使えば「@BOOT-A.bin」と「@BOOT-B.bin」を切り替えて読み込むことができます。
+
+　前述の手順によりEXT-ROM_SD MZ-80B.bin又はEXT-ROM_SD MZ-2000.binを修正を加えたMONITORの後ろ(12A0h～)に付け加えて保存したバイナリファイルを「@BOOT-A.bin」又は「@BOOT-B.bin」のファイルネームでSD-CARDに保存してください。
+
+#### BOOT LOADERをROMに書き込む
+　BOOT_LOADERフォルダにある「BOOT_LOADER.bin」または「BOOT_A_LOADER.bin」をROMに書き込みます。
+
+　　27256を使用する場合は「BOOT_A_LOADER.bin」を書き込んでください。
+
+　　27512を使用する場合は「BOOT_LOADER.bin」を書き込んでください。
+
+　また、この機能に対応させるためArduinoプログラムも更新しました。この機能を使いたい場合にはArduinoプログラムも書き込み直してください。
+
 ## Arduinoプログラム
 
 　MZ-80K_SDと全く同じものを使用しています。
@@ -837,3 +855,7 @@ MZ-2000、MZ-80BともFDコマンドでの読み込み終了アドレスがF800H
 2023.3.8
 
 MZ-2500のZ80PIOとI/Oアドレスがぶつかっており、MZ-2500モードではMZ-2000_SDを接続したままRS-232C、マウスを使おうとするとハングアップすることを追記。
+
+2023.6.19
+
+従来のBASICから抽出したMONITORを修正してROMに書き込む方式以外に「BASICから抽出したMONITORを修正したバイナリファイル」をSD-CARDから読み込むプログラムをROMに書き込む方式を追加した。
