@@ -269,23 +269,36 @@ MicroSD Card Adapterについているピンヘッダを除去してハンダ付
 
 　12　実行開始アドレスにJUMPする。
 
-### ROMにBOOT LOADERを書き込む方式の追加(2023.6.19 現在MZ-80Bで動作しません)
+### ROMにBOOT LOADERを書き込む方式の追加
 　前述のBASICからMONITORを抜き出してROMに書き込む方式は、自分が所有しているBASICから抜き出してROMに書き込むには問題が無いのですが、書き込み済みROMの配布はSHARPの著作権があるので出来ません。
 
-　そこで「@BOOT-A.bin」というバイナリファイルをSD-CARDから読み込み起動するプログラムをROMに書き込む方式を追加しました。
+　そこで「@BOOT-A MZ-2000.bin」、「@BOOT-A MZ-80B.bin」というバイナリファイルをSD-CARDから読み込み起動するプログラムをROMに書き込む方式を追加しました。
 
-　ROMに27256を使えば「@BOOT-A.bin」、27512を使えば「@BOOT-A.bin」と「@BOOT-B.bin」を切り替えて読み込むことができます。
+　ROMに27256を使えば「@BOOT-A MZ-xxxx.bin」、27512を使えば「@BOOT-A MZ-xxxx.bin」と「@BOOT-B MZ-xxxx.bin」を切り替えて読み込むことができます。
 
-　前述の手順によりEXT-ROM_SD MZ-80B.bin又はEXT-ROM_SD MZ-2000.binを修正を加えたMONITORの後ろ(12A0h～)に付け加えて保存したバイナリファイルを「@BOOT-A.bin」又は「@BOOT-B.bin」のファイルネームでSD-CARDに保存してください。
+　前述の手順により修正を加えたMONITORの後ろ(12A0h～)にEXT-ROM_SD MZ-2000.bin又はEXT-ROM_SD MZ-80B.binを付け加えて保存したバイナリファイル(従来ROMに書き込んでいたバイナリファイル)を「@BOOT-A MZ-2000.bin」又は「@BOOT-A MZ-80B.bin」のファイルネームでSD-CARDに保存してください。
+
+　27512を使うのであれば同様にBASICを加工したバイナリファイル(従来ROMに書き込んでいたバイナリファイル)を「@BOOT-B MZ-2000.bin」又は「@BOOT-B MZ-80B.bin」のファイルネームでSD-CARDに保存することでスイッチの切り替えで読み込むことができます。
 
 #### BOOT LOADERをROMに書き込む
-　BOOT_LOADERフォルダにある「BOOT_LOADER.bin」または「BOOT_A_LOADER.bin」をROMに書き込みます。
+　BOOT_LOADERフォルダにある「BOOT_A_LOADER.bin」または「BOOT_AB_LOADER.bin」をROMに書き込みます。
 
 　　27256を使用する場合は「BOOT_A_LOADER.bin」を書き込んでください。
 
-　　27512を使用する場合は「BOOT_LOADER.bin」を書き込んでください。
+　　27512を使用する場合は「BOOT_AB_LOADER.bin」を書き込んでください。
 
-　また、この機能に対応させるためArduinoプログラムも更新しました。この機能を使いたい場合にはArduinoプログラムも書き込み直してください。
+#### 「@BOOT-A MZ-xxxx.bin」を作成してSD-CARDに保存する
+　「ROMへの書込み」を参照してバイナリファイル(従来ROMに書き込んでいたバイナリファイル)を作成します。
+
+　出来上がったファイルの名前は、MZ-2000用なら「@BOOT-A MZ-2000.bin」、MZ-80B用なら「@BOOT-A MZ-80B.bin」としてSD-CARDに保存します。
+
+　起動させた機械がMZ-2000か、MZ-80Bか自動的に判断して「@BOOT-A MZ-2000.bin」、「@BOOT-A MZ-80B.bin」のどちらかを読み込まれます。
+
+#### 「@BOOT-B MZ-xxxx.bin」を作成してSD-CARDに保存する(27512を使用する場合)
+　後述の「BASICをEXT-ROMから起動させる」を参照してバイナリファイル(従来ROMに書き込んでいたバイナリファイル)を作成し、出来上がったファイルの名前をMZ-2000用なら「@BOOT-B MZ-2000.bin」、MZ-80B用なら「@BOOT-B MZ-80B.bin」としてSD-CARDに保存します。
+
+#### Arduinoプログラム
+　この機能に対応させるためArduinoプログラムも更新しました。この機能を使いたい場合にはArduinoプログラムも書き込み直してください。
 
 ## Arduinoプログラム
 
@@ -872,3 +885,7 @@ MZ-2500のZ80PIOとI/Oアドレスがぶつかっており、MZ-2500モードで
 従来のBASICから抽出したMONITORを修正してROMに書き込む方式以外に「BASICから抽出したMONITORを修正したバイナリファイル」をSD-CARDから読み込むプログラムをROMに書き込む方式を追加した。(現在MZ-80Bで動作不可。)
 
 MZ-2500で拡張ユニットが無く、変換アダプタを自作するときの例を追加。
+
+2023.6.21
+
+「BASICから抽出したMONITORを修正したバイナリファイル」をSD-CARDから読み込むプログラムをROMに書き込む方式をMZ-2000、MZ-80B及び初期型を含めたMZ-2500の2000モード、80Bモードに対応した。
