@@ -18,205 +18,306 @@
   0000                	        ORG		0000H
                       	
   0000  00            			NOP
-  0001  C3007E        			JP		INIT
+  0001  31FF4F        			LD		SP,4FFFH               ;取り敢えずスタックポインタ設定
+                      			
+  0004  DBE0          			IN		A,(0E0H)               ;MZ-2000、MZ-80Bを判別して初期設定
+  0006  FEFF          			CP		0FFH
+  0008  2005          			JR		NZ,IO0
+  000A  213300        			LD		HL,IOTBL2000
+  000D  1803          			JR		IO1
+  000F  215900        	IO0:	LD		HL,IOTBL80B
+  0012  7E            	IO1:	LD		A,(HL)
+  0013  23            			INC		HL
+  0014  4E            			LD		C,(HL)
+  0015  23            			INC		HL
+  0016  ED79          			OUT		(C),A
+  0018  3C            			INC		A
+  0019  20F7          			JR		NZ,IO1
+  001B  CD2400        			CALL	SYOKI
+  001E  3E0D          			LD		A,0DH
+  0020  D3E3          			OUT		(0E3H),A
                       	
-  7E00                			ORG		7E00H
+  0022  1853          			JR		TENSO                   ;転送プログラムへ
                       	
+  0024  DBE0          	SYOKI:	IN		A,(0E0H)
+  0026  FEFF          			CP		0FFH
+  0028  2004          			JR		NZ,SK1
+  002A  3EFF          			LD		A,0FFH
+  002C  1802          			JR		SK2
+  002E  3E12          	SK1:	LD		A,12H
+  0030  D3E0          	SK2:	OUT		(0E0H),A
+  0032  C9            			RET
+                      	
+  0033                	IOTBL2000:
+  0033  02E3          			DEFW	0E302H
+  0035  34E7          			DEFW	0E734H
+  0037  74E7          			DEFW	0E774H
+  0039  B4E7          			DEFW	0E7B4H
+  003B  00E6          			DEFW	0E600H
+  003D  00E6          			DEFW	0E600H
+  003F  02E5          			DEFW	0E502H
+  0041  00E5          			DEFW	0E500H
+  0043  02E4          			DEFW	0E402H
+  0045  00E4          			DEFW	0E400H
+  0047  CFE9          			DEFW	0E9CFH
+  0049  00E9          			DEFW	0E900H
+  004B  40E8          			DEFW	0E840H
+  004D  01F7          			DEFW	0F701H
+  004F  00F6          			DEFW	0F600H
+  0051  07F5          			DEFW	0F507H
+  0053  00F4          			DEFW	0F400H
+  0055  CFEB          			DEFW	0EBCFH
+  0057  FFEB          			DEFW	0EBFFH
+                      			
+  0059                	IOTBL80B:
+  0059  02E3          			DEFW	0E302H
+  005B  34E7          			DEFW	0E734H
+  005D  74E7          			DEFW	0E774H
+  005F  B4E7          			DEFW	0E7B4H
+  0061  00E6          			DEFW	0E600H
+  0063  00E6          			DEFW	0E600H
+  0065  02E5          			DEFW	0E502H
+  0067  00E5          			DEFW	0E500H
+  0069  02E4          			DEFW	0E402H
+  006B  00E4          			DEFW	0E400H
+  006D  CFE9          			DEFW	0E9CFH
+  006F  00E9          			DEFW	0E900H
+  0071  00E8          			DEFW	0E800H
+  0073  CFEB          			DEFW	0EBCFH
+  0075  FFEB          			DEFW	0EBFFH
+                      	
+  0077                	TENSO:                                     ;SDからの読み込みプログラムをメモリ後半に転送
+  0077  218500        			LD		HL,MARK1
+  007A  110080        			LD		DE,MARK2                   ;8000hへ転送
+  007D  01A501        			LD		BC,MARK3-MARK2-1
+  0080  EDB0          			LDIR
+  0082  C30080        			JP		MARK2                      ;8000hへジャンプ
+                      	
+  0085                	MARK1:
+  8000                			ORG		8000H
+                      	
+  8000                	MARK2:
+  8000  31FF8F        			LD		SP,8FFFH                   ;スタックポインタ再設定
+  8003  DBE0          			IN		A,(0E0H)                   ;MZ-2000、MZ-80Bを判別して読み込むべきファイルネームを切り替え
+  8005  FEFF          			CP		0FFH
+  8007  2007          			JR		NZ,FLG80B
+  8009  3E00          	FLG2000:LD		A,00H
+  800B  21A980        			LD		HL,FNAME2000
+  800E  1805          			JR		FLG1
+  8010  3E01          	FLG80B:	LD		A,01H
+  8012  21BD80        			LD		HL,FNAME80B
+  8015  32A381        	FLG1:	LD		(FLG),A
+  8018  118880        			LD		DE,FNAME
+  801B  011400        			LD		BC,20
+  801E  EDB0          			LDIR
+                      			
                       	;**** 8255初期化 ****
                       	;PORTC下位BITをOUTPUT、上位BITをINPUT、PORTBをINPUT、PORTAをOUTPUT
-  7E00  31FFFF        	INIT:	LD		SP,0FFFFH
-  7E03  3E8A          			LD		A,8AH
-  7E05  D3A3          			OUT		(0A3H),A
+  8020  3E8A          	INIT:	LD		A,8AH
+  8022  D3A3          			OUT		(0A3H),A
                       	;出力BITをリセット
-  7E07  3E00          	INIT2:	LD		A,00H      ;PORTA <- 0
-  7E09  D3A0          			OUT		(0A0H),A
-  7E0B  D3A2          			OUT		(0A2H),A   ;PORTC <- 0
+  8024  3E00          	INIT2:	LD		A,00H      ;PORTA <- 0
+  8026  D3A0          			OUT		(0A0H),A
+  8028  D3A2          			OUT		(0A2H),A   ;PORTC <- 0
                       	
-  7E0D                	START:	
-  7E0D  3E95          			LD		A,95H      ;BOOTコマンド95H
-  7E0F  CDE47E        			CALL	STCD       ;コマンドコード送信
-  7E12  A7            			AND		A          ;00以外ならERROR
-  7E13  C2517E        			JP		NZ,ERR
+  802A                	START:
+  802A  3E95          			LD		A,95H      ;BOOTコマンド95H
+  802C  CD3081        			CALL	STCD       ;コマンドコード送信
+  802F  A7            			AND		A          ;00以外ならERROR
+  8030  C26E80        			JP		NZ,ERR
                       	
-  7E16  216B7E        			LD		HL,FNAME   ;ファイルネーム送信「@BOOT-x.bin」
-  7E19  CDEB7E        			CALL	STFS
-  7E1C  A7            			AND		A          ;00以外ならERROR
-  7E1D  C2517E        			JP		NZ,ERR
+  8033  218880        			LD		HL,FNAME   ;ファイルネーム送信「@BOOT-x.bin」
+  8036  CD3781        			CALL	STFS
+  8039  A7            			AND		A          ;00以外ならERROR
+  803A  C26E80        			JP		NZ,ERR
                       	
-  7E20  CDA17E        			CALL	RCVBYTE    ;状態取得(00H=OK)
-  7E23  A7            			AND		A          ;00以外ならERROR
-  7E24  C2517E        			JP		NZ,ERR
+  803D  CDED80        			CALL	RCVBYTE    ;状態取得(00H=OK)
+  8040  A7            			AND		A          ;00以外ならERROR
+  8041  C26E80        			JP		NZ,ERR
                       	
-  7E27  3E1C          			LD		A,1CH
-  7E29  32497F        			LD		(CURX),A
-  7E2C  3E0C          			LD		A,0CH
-  7E2E  324A7F        			LD		(CURY),A
-  7E31  21637E        			LD		HL,MSG1    ;LOADING @BOOT-x.bin表示
-  7E34  CD107F        			CALL	STRPR
+  8044  3E07          			LD		A,07H
+  8046  32A481        			LD		(CURX),A
+  8049  3E0C          			LD		A,0CH
+  804B  32A581        			LD		(CURY),A
+  804E  218080        			LD		HL,MSG1    ;LOADING @BOOT-x.bin表示
+  8051  CD6A81        			CALL	STRPR
                       	
-  7E37  CDA17E        			CALL	RCVBYTE    ;ファイルサイズ下位バイト受信
-  7E3A  5F            			LD		E,A
-  7E3B  CDA17E        			CALL	RCVBYTE    ;ファイルサイズ上位バイト受信
-  7E3E  57            			LD		D,A
-  7E3F  210000        			LD		HL,0000H
-  7E42  CDA17E        	LOP1:	CALL	RCVBYTE    ;ファイルサイズ分データ受信
-  7E45  77            			LD		(HL),A
-  7E46  23            			INC		HL
-  7E47  E5            			PUSH	HL
-  7E48  AF            			XOR		A
-  7E49  ED52          			SBC		HL,DE
-  7E4B  E1            			POP		HL
-  7E4C  20F4          			JR		NZ,LOP1
-  7E4E  C30000        			JP		0000H      ;0000Hからスタート
+  8054  CDED80        			CALL	RCVBYTE    ;ファイルサイズ下位バイト受信
+  8057  5F            			LD		E,A
+  8058  CDED80        			CALL	RCVBYTE    ;ファイルサイズ上位バイト受信
+  805B  57            			LD		D,A
+  805C  210000        			LD		HL,0000H
+  805F  CDED80        	LOP1:	CALL	RCVBYTE    ;ファイルサイズ分データ受信
+  8062  77            			LD		(HL),A
+  8063  23            			INC		HL
+  8064  E5            			PUSH	HL
+  8065  AF            			XOR		A
+  8066  ED52          			SBC		HL,DE
+  8068  E1            			POP		HL
+  8069  20F4          			JR		NZ,LOP1
+  806B  C30000        			JP		0000H      ;0000Hからスタート
                       	
-  7E51  3E1C          	ERR:	LD		A,1CH
-  7E53  32497F        			LD		(CURX),A
-  7E56  3E0C          			LD		A,0CH
-  7E58  324A7F        			LD		(CURY),A
-  7E5B  218C7E        			LD		HL,MSG2    ;エラー表示
-  7E5E  CD107F        			CALL	STRPR
-  7E61  18EE          			JR		ERR
+  806E  3E07          	ERR:	LD		A,07H
+  8070  32A481        			LD		(CURX),A
+  8073  3E0C          			LD		A,0CH
+  8075  32A581        			LD		(CURY),A
+  8078  21D180        			LD		HL,MSG2    ;エラー表示
+  807B  CD6A81        			CALL	STRPR
+  807E  18EE          			JR		ERR
                       	
-  7E63  4C4F4144494E47	MSG1:	DB		'LOADING '
+  8080  4C4F4144494E47	MSG1:	DB		'LOADING '
                       	
-  7E6B  40424F4F542D41	FNAME	DB		'@BOOT-A.bin',00H,00H,00H,00H,00H,00H,00H,00H,00H
-                      	;FNAME	DB		'@BOOT-B.bin',00H,00H,00H,00H,00H,00H,00H,00H,00H
-  7E7F  00000000000000			DB		00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H
+  8088  40424F4F542D41	FNAME:	DB		'@BOOT-A MZ-2000.bin',00H
+  809C  00000000000000			DB		00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H
+  80A9                	FNAME2000:
+  80A9  40424F4F542D41			DB		'@BOOT-A MZ-2000.bin',00H
+                      	;		DB		'@BOOT-B MZ-2000.bin',00H             ;27512ならこちらを有効にしてアセンブル
+  80BD                	FNAME80B:
+  80BD  40424F4F542D41			DB		'@BOOT-A MZ-80B.bin',00H,00H
+                      	;		DB		'@BOOT-B MZ-80B.bin',00H,00H          ;27512ならこちらを有効にしてアセンブル
                       	
-  7E8C  20202020202053	MSG2:	DB		'      SD ERROR      ',00H
+  80D1  20202020202020	MSG2:	DB		'         SD ERROR          ',00H
                       	
                       	;**** 1BYTE受信 ****
                       	;受信DATAをAレジスタにセットしてリターン
-  7EA1                	RCVBYTE:
-  7EA1  CDD67E        			CALL	F1CHK      ;PORTC BIT7が1になるまでLOOP
-  7EA4  DBA1          			IN		A,(0A1H)   ;PORTB -> A
-  7EA6  F5            			PUSH 	AF
-  7EA7  3E05          			LD		A,05H
-  7EA9  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 1
-  7EAB  CDDD7E        			CALL	F2CHK      ;PORTC BIT7が0になるまでLOOP
-  7EAE  3E04          			LD		A,04H
-  7EB0  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 0
-  7EB2  F1            			POP 	AF
-  7EB3  C9            			RET
+  80ED                	RCVBYTE:
+  80ED  CD2281        			CALL	F1CHK      ;PORTC BIT7が1になるまでLOOP
+  80F0  DBA1          			IN		A,(0A1H)   ;PORTB -> A
+  80F2  F5            			PUSH 	AF
+  80F3  3E05          			LD		A,05H
+  80F5  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 1
+  80F7  CD2981        			CALL	F2CHK      ;PORTC BIT7が0になるまでLOOP
+  80FA  3E04          			LD		A,04H
+  80FC  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 0
+  80FE  F1            			POP 	AF
+  80FF  C9            			RET
                       			
                       	;**** 1BYTE送信 ****
                       	;Aレジスタの内容をPORTA下位4BITに4BITずつ送信
-  7EB4                	SNDBYTE:
-  7EB4  F5            			PUSH	AF
-  7EB5  1F            			RRA
-  7EB6  1F            			RRA
-  7EB7  1F            			RRA
-  7EB8  1F            			RRA
-  7EB9  E60F          			AND		0FH
-  7EBB  CDC57E        			CALL	SND4BIT
-  7EBE  F1            			POP		AF
-  7EBF  E60F          			AND		0FH
-  7EC1  CDC57E        			CALL	SND4BIT
-  7EC4  C9            			RET
+  8100                	SNDBYTE:
+  8100  F5            			PUSH	AF
+  8101  1F            			RRA
+  8102  1F            			RRA
+  8103  1F            			RRA
+  8104  1F            			RRA
+  8105  E60F          			AND		0FH
+  8107  CD1181        			CALL	SND4BIT
+  810A  F1            			POP		AF
+  810B  E60F          			AND		0FH
+  810D  CD1181        			CALL	SND4BIT
+  8110  C9            			RET
                       	
                       	;**** 4BIT送信 ****
                       	;Aレジスタ下位4ビットを送信する
-  7EC5                	SND4BIT:
-  7EC5  D3A0          			OUT		(0A0H),A
-  7EC7  3E05          			LD		A,05H
-  7EC9  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 1
-  7ECB  CDD67E        			CALL	F1CHK      ;PORTC BIT7が1になるまでLOOP
-  7ECE  3E04          			LD		A,04H
-  7ED0  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 0
-  7ED2  CDDD7E        			CALL	F2CHK
-  7ED5  C9            			RET
+  8111                	SND4BIT:
+  8111  D3A0          			OUT		(0A0H),A
+  8113  3E05          			LD		A,05H
+  8115  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 1
+  8117  CD2281        			CALL	F1CHK      ;PORTC BIT7が1になるまでLOOP
+  811A  3E04          			LD		A,04H
+  811C  D3A3          			OUT		(0A3H),A    ;PORTC BIT2 <- 0
+  811E  CD2981        			CALL	F2CHK
+  8121  C9            			RET
                       			
                       	;**** BUSYをCHECK(1) ****
                       	; 82H BIT7が1になるまでLOP
-  7ED6  DBA2          	F1CHK:	IN		A,(0A2H)
-  7ED8  E680          			AND		80H        ;PORTC BIT7 = 1?
-  7EDA  28FA          			JR		Z,F1CHK
-  7EDC  C9            			RET
+  8122  DBA2          	F1CHK:	IN		A,(0A2H)
+  8124  E680          			AND		80H        ;PORTC BIT7 = 1?
+  8126  28FA          			JR		Z,F1CHK
+  8128  C9            			RET
                       	
                       	;**** BUSYをCHECK(0) ****
                       	; 82H BIT7が0になるまでLOOP
-  7EDD  DBA2          	F2CHK:	IN		A,(0A2H)
-  7EDF  E680          			AND		80H        ;PORTC BIT7 = 0?
-  7EE1  20FA          			JR		NZ,F2CHK
-  7EE3  C9            			RET
+  8129  DBA2          	F2CHK:	IN		A,(0A2H)
+  812B  E680          			AND		80H        ;PORTC BIT7 = 0?
+  812D  20FA          			JR		NZ,F2CHK
+  812F  C9            			RET
                       	
                       	;**** コマンド送信 (IN:A コマンドコード)****
-  7EE4  CDB47E        	STCD:	CALL	SNDBYTE    ;Aレジスタのコマンドコードを送信
-  7EE7  CDA17E        			CALL	RCVBYTE    ;状態取得(00H=OK)
-  7EEA  C9            			RET
+  8130  CD0081        	STCD:	CALL	SNDBYTE    ;Aレジスタのコマンドコードを送信
+  8133  CDED80        			CALL	RCVBYTE    ;状態取得(00H=OK)
+  8136  C9            			RET
                       	
                       	;**** ファイルネーム送信(IN:HL ファイルネームの先頭) ******
-  7EEB  0620          	STFS:	LD		B,20H
-  7EED  7E            	STFS1:	LD		A,(HL)     ;FNAME送信
-  7EEE  CDB47E        			CALL	SNDBYTE
-  7EF1  23            			INC		HL
-  7EF2  05            			DEC		B
-  7EF3  20F8          			JR		NZ,STFS1
-  7EF5  3E0D          			LD		A,0DH
-  7EF7  CDB47E        			CALL	SNDBYTE
-  7EFA  CDA17E        			CALL	RCVBYTE    ;状態取得(00H=OK)
-  7EFD  C9            			RET
+  8137  0620          	STFS:	LD		B,20H
+  8139  7E            	STFS1:	LD		A,(HL)     ;FNAME送信
+  813A  CD0081        			CALL	SNDBYTE
+  813D  23            			INC		HL
+  813E  05            			DEC		B
+  813F  20F8          			JR		NZ,STFS1
+  8141  3E0D          			LD		A,0DH
+  8143  CD0081        			CALL	SNDBYTE
+  8146  CDED80        			CALL	RCVBYTE    ;状態取得(00H=OK)
+  8149  C9            			RET
                       	
                       	;V-RAM アクセスON
-  7EFE  F5            	VRAMON:	PUSH	AF
-  7EFF  DBE8          			IN		A,(0E8H)
-  7F01  F6C0          			OR		0C0H
-  7F03  D3E8          			OUT		(0E8H),A
-  7F05  F1            			POP		AF
-  7F06  C9            			RET
+  814A  F5            	VRAMON:	PUSH	AF
+  814B  DBE8          			IN		A,(0E8H)
+  814D  F5            			PUSH	AF
+  814E  3AA381        			LD		A,(FLG)
+  8151  FE01          			CP		01H
+  8153  2804          			JR		Z,VO1
+  8155  06C0          			LD		B,0C0H
+  8157  1802          			JR		VO2
+  8159  0680          	VO1:	LD		B,80H
+  815B  F1            	VO2:	POP		AF
+  815C  B0            			OR		B
+  815D  D3E8          			OUT		(0E8H),A
+  815F  F1            			POP		AF
+  8160  C9            			RET
                       	
                       	;V-RAMアクセスOFF
-  7F07  F5            	VRAMOF:	PUSH	AF
-  7F08  DBE8          			IN		A,(0E8H)
-  7F0A  E67F          			AND		7FH
-  7F0C  D3E8          			OUT		(0E8H),A
-  7F0E  F1            			POP		AF
-  7F0F  C9            			RET
+  8161  F5            	VRAMOF:	PUSH	AF
+  8162  DBE8          			IN		A,(0E8H)
+  8164  E67F          			AND		7FH
+  8166  D3E8          			OUT		(0E8H),A
+  8168  F1            			POP		AF
+  8169  C9            			RET
                       	
                       	;文字列を表示
-  7F10  7E            	STRPR:	LD		A,(HL)
-  7F11  FE00          			CP		00H
-  7F13  C8            			RET		Z
-  7F14  CD1A7F        			CALL	PRINT
-  7F17  23            			INC		HL
-  7F18  18F6          			JR		STRPR
+  816A  7E            	STRPR:	LD		A,(HL)
+  816B  FE00          			CP		00H
+  816D  C8            			RET		Z
+  816E  CD7481        			CALL	PRINT
+  8171  23            			INC		HL
+  8172  18F6          			JR		STRPR
                       	
                       	;Aレジスタの内容をASCIIコードとしてCURX,Yの位置に表示
-  7F1A  E5            	PRINT:	PUSH	HL
-  7F1B  F5            			PUSH	AF
-  7F1C  CD307F        			CALL	CALXY
-  7F1F  F1            			POP		AF
-  7F20  CDFE7E        			CALL	VRAMON
-  7F23  77            			LD		(HL),A
-  7F24  CDFE7E        			CALL	VRAMON
-  7F27  3A497F        			LD		A,(CURX)
-  7F2A  3C            			INC		A
-  7F2B  32497F        			LD		(CURX),A
-  7F2E  E1            			POP		HL
-  7F2F  C9            			RET
+  8174  E5            	PRINT:	PUSH	HL
+  8175  F5            			PUSH	AF
+  8176  CD8A81        			CALL	CALXY
+  8179  F1            			POP		AF
+  817A  CD4A81        			CALL	VRAMON
+  817D  77            			LD		(HL),A
+  817E  CD4A81        			CALL	VRAMON
+  8181  3AA481        			LD		A,(CURX)
+  8184  3C            			INC		A
+  8185  32A481        			LD		(CURX),A
+  8188  E1            			POP		HL
+  8189  C9            			RET
                       			
                       	;CURX,YからV-RAMアドレスを算出
-  7F30  D5            	CALXY:	PUSH	DE
-  7F31  C5            			PUSH	BC
-  7F32  21B0CF        			LD		HL,0D000H-50H
-  7F35  3A4A7F        			LD		A,(CURY)
-  7F38  3C            			INC		A
-  7F39  47            			LD		B,A
-  7F3A  1600          			LD		D,00H
-  7F3C  1E50          			LD		E,50H
-  7F3E  19            	CALXY1:	ADD		HL,DE
-  7F3F  10FD          			DJNZ	CALXY1
-  7F41  3A497F        			LD		A,(CURX)
-  7F44  5F            			LD		E,A
-  7F45  19            			ADD		HL,DE
-  7F46  C1            			POP		BC
-  7F47  D1            			POP		DE
-  7F48  C9            			RET
+  818A  D5            	CALXY:	PUSH	DE
+  818B  C5            			PUSH	BC
+  818C  21D8CF        			LD		HL,0D000H-28H
+  818F  3AA581        			LD		A,(CURY)
+  8192  3C            			INC		A
+  8193  47            			LD		B,A
+  8194  1600          			LD		D,00H
+  8196  1E28          			LD		E,28H
+  8198  19            	CALXY1:	ADD		HL,DE
+  8199  10FD          			DJNZ	CALXY1
+  819B  3AA481        			LD		A,(CURX)
+  819E  5F            			LD		E,A
+  819F  19            			ADD		HL,DE
+  81A0  C1            			POP		BC
+  81A1  D1            			POP		DE
+  81A2  C9            			RET
                       			
-  7F49  00            	CURX:	DB		00H
-  7F4A  00            	CURY:	DB		00H
+  81A3  00            	FLG:	DB		00H
+  81A4  00            	CURX:	DB		00H
+  81A5  00            	CURY:	DB		00H
                       	
-  7FFF                			ORG		7FFFH
-  7FFF  00            			DB		00H
-  8000                			END
+  81A6                	MARK3:
+  81A6                			END
 
