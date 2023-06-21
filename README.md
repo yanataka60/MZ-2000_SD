@@ -276,7 +276,7 @@ MicroSD Card Adapterについているピンヘッダを除去してハンダ付
 
 　ROMに27256を使えば「@BOOT-A MZ-xxxx.bin」、27512を使えば「@BOOT-A MZ-xxxx.bin」と「@BOOT-B MZ-xxxx.bin」を切り替えて読み込むことができます。
 
-　前述の手順により修正を加えたMONITORの後ろ(12A0h～)にEXT-ROM_SD MZ-2000.bin又はEXT-ROM_SD MZ-80B.binを付け加えて保存したバイナリファイル(従来ROMに書き込んでいたバイナリファイル)を「@BOOT-A MZ-2000.bin」又は「@BOOT-A MZ-80B.bin」のファイルネームでSD-CARDに保存してください。
+　前述「ROMへの書込み」の手順により修正を加えたMONITORの後ろ(12A0h～)にEXT-ROM_SD MZ-2000.bin又はEXT-ROM_SD MZ-80B.binを付け加えて保存したバイナリファイル(従来ROMに書き込んでいたバイナリファイル)を「@BOOT-A MZ-2000.bin」又は「@BOOT-A MZ-80B.bin」のファイルネームでSD-CARDに保存してください。
 
 　27512を使うのであれば同様にBASICを加工したバイナリファイル(従来ROMに書き込んでいたバイナリファイル)を「@BOOT-B MZ-2000.bin」又は「@BOOT-B MZ-80B.bin」のファイルネームでSD-CARDに保存することでスイッチの切り替えで読み込むことができます。
 
