@@ -1,3 +1,5 @@
+;2023.6.23 「NOT FOUND @BOOT-x xxxxxxx.bin」にエラーメッセージを修正。
+
 ;0A0H PORTA 送信データ(下位4ビット)
 ;0A1H PORTB 受信データ(8ビット)
 ;
@@ -134,7 +136,7 @@ START:
 		AND		A          ;00以外ならERROR
 		JP		NZ,ERR
 
-		LD		A,07H
+		LD		A,06H
 		LD		(CURX),A
 		LD		A,0CH
 		LD		(CURY),A
@@ -156,15 +158,19 @@ LOP1:	CALL	RCVBYTE    ;ファイルサイズ分データ受信
 		JR		NZ,LOP1
 		JP		0000H      ;0000Hからスタート
 
-ERR:	LD		A,07H
+ERR:	LD		HL,MSG2    ;NOT FOUND
+		LD		DE,MSG1
+		LD		BC,10
+		LDIR
+ERR2:	LD		A,06H
 		LD		(CURX),A
 		LD		A,0CH
 		LD		(CURY),A
-		LD		HL,MSG2    ;エラー表示
+		LD		HL,MSG1
 		CALL	STRPR
-		JR		ERR
+		JR		ERR2
 
-MSG1:	DB		'LOADING '
+MSG1:	DB		'LOADING   '
 
 FNAME:	DB		'@BOOT-A MZ-2000.bin',00H
 		DB		00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H
@@ -175,7 +181,7 @@ FNAME80B:
 		DB		'@BOOT-A MZ-80B.bin',00H,00H
 ;		DB		'@BOOT-B MZ-80B.bin',00H,00H          ;27512ならこちらを有効にしてアセンブル
 
-MSG2:	DB		'         SD ERROR          ',00H
+MSG2:	DB		'NOT FOUND '
 
 ;**** 1BYTE受信 ****
 ;受信DATAをAレジスタにセットしてリターン
