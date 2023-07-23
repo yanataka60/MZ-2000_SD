@@ -405,6 +405,7 @@ MZ-80B用拡張I/Oポートが手に入ったときにはMZ-80Bインタフェ�
 ![MZ-80B_EXT_BOARD(6)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-80B_EXT_BOARD(6).JPG)
 
 ### MZ-2500の拡張ユニットが無く、本体内部のコネクタに接続する場合
+#### 2023.7.23追記 MZ-2500本体内部のコネクタに変換アダプタを挿し込む方法では正常に動作しない場合があるようです。正常に動作しない場合には、後述の変換アダプタをMZ-2000_SD基板側に装着する方法を試してください。
 　MZ-2000_SDと本体内部のコネクタを単純にPinケーブルで接続するとA、B面が逆転してしまうため動作しません。MZ-2000_SDのコネクタを裏面にハンダ付けするか、変換アダプタを自作して接続してください。
 
 ![MZ-2500_1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_1.jpg)
@@ -418,8 +419,17 @@ MZ-80B用拡張I/Oポートが手に入ったときにはMZ-80Bインタフェ�
 
 　EXT-BOARD基板の裏面に22x2Pinピンヘッダをつけて出来上がりです。
 
-![MZ-2500_1](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_3.jpg)
-![MZ-2500_2](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_4.jpg)
+![MZ-2500_3](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_3.jpg)
+![MZ-2500_4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_4.jpg)
+![MZ-2500_5](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_5.jpg)
+
+#### 作成した変換アダプタをMZ-2000_SD基板側に取り付ける場合
+　MZ-2500本体内部のコネクタに変換アダプタを挿し込む方法で動作しない場合には、作成した変換アダプタをMZ-2000_SD基板側に取り付ける方法を試してみてください。
+
+　信号的には同じ接続のはずですが、コネクタの挿し込み具合等により前述の方法では動作しない場合があるようです。
+
+![MZ-2500_6](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_6.jpg)
+![MZ-2500_7](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2500_7.jpg)
 
 ## 外部電源
 　EXPANSION UNITを使わずにMZ-2000、MZ-2200本体に接続する場合は、本体側カードエッジには5Vが出ていないため、外部電源が必要となります。
