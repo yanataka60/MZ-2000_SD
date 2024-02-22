@@ -1,4 +1,6 @@
 			  Z80 ASSEMBLER - ZASM VER 1.6
+                      	;2024.2.22 LOADに時々失敗するため、8088へデータ送信後、WAITルーチンを挿入
+                      	
   0602                	LDINF		EQU		0602H		;STARTアドレス、ファイルサイズセット
   0962                	GETKY		EQU		0962H		;キーボートから1文字だけAレジスタに取り込む
   09A0                	PRNT		EQU		09A0H		;AレジスタのASCIIコードを表示
@@ -78,7 +80,7 @@
                       	;****              戻り値 A=エラーコード ****
   9049                	DIRLIST:
   9049  3E83          			LD		A,83H      ;DIRLISTコマンド83Hを送信
-  904B  CDB393        			CALL	MCMD	   ;コマンドコード送信
+  904B  CDB693        			CALL	MCMD	   ;コマンドコード送信
   904E  A7            			AND		A          ;00以外ならERROR
   904F  C0            			RET		NZ
                       			
@@ -228,7 +230,7 @@
   9168                	MSHED:
   9168  CD0F90        			CALL	INIT
   916B  3E91          			LD		A,91H      ;HEADER SAVEコマンド91H
-  916D  CDB393        			CALL	MCMD       ;コマンドコード送信
+  916D  CDB693        			CALL	MCMD       ;コマンドコード送信
   9170  A7            			AND		A          ;00以外ならERROR
   9171  C2C291        			JP		NZ,ERR1
                       	
@@ -343,7 +345,7 @@
                       	;******************** 05F8H WRDAT 代替処理 **********************
   9257                	MSDAT:
   9257  3E92          			LD		A,92H      ;DATA SAVEコマンド92H
-  9259  CDB393        			CALL	MCMD       ;コマンドコード送信
+  9259  CDB693        			CALL	MCMD       ;コマンドコード送信
   925C  A7            			AND		A          ;00以外ならERROR
   925D  C2C291        			JP		NZ,ERR1
                       	
@@ -436,7 +438,7 @@
   92EE  2848          			JR		Z,MLHCMD
                       	
   92F0  3E93          			LD		A,93H      ;HEADER LOADコマンド93H
-  92F2  CDB393        			CALL	MCMD       ;コマンドコード送信
+  92F2  CDB693        			CALL	MCMD       ;コマンドコード送信
   92F5  A7            			AND		A          ;00以外ならERROR
   92F6  C2C291        			JP		NZ,ERR1
                       	
@@ -541,7 +543,7 @@
                       	;**************************** 0629H RDDAT 代替処理 ********************
   9376                	MLDAT:
   9376  3E94          			LD		A,94H      ;DATA LOADコマンド94H
-  9378  CDB393        			CALL	MCMD       ;コマンドコード送信
+  9378  CDB693        			CALL	MCMD       ;コマンドコード送信
   937B  A7            			AND		A          ;00以外ならERROR
   937C  C2C291        			JP		NZ,ERR1
                       	
@@ -572,18 +574,19 @@
   93A7  CDCF90        	DBRLOP:	CALL	RCVBYTE		;実データをArduinoから読み込み
   93AA  D3D4          			OUT		(0D4H),A	;8088へ送信
                       	;		LD		(HL),A
-  93AC  0B            			DEC		BC
-  93AD  78            			LD		A,B
-  93AE  B1            			OR		C
-  93AF  23            			INC		HL
-  93B0  20F5          			JR		NZ,DBRLOP   ;BC=0までLOOP
-  93B2  C9            			RET
+  93AC  CD1291        			CALL	LOOP
+  93AF  0B            			DEC		BC
+  93B0  78            			LD		A,B
+  93B1  B1            			OR		C
+  93B2  23            			INC		HL
+  93B3  20F2          			JR		NZ,DBRLOP   ;BC=0までLOOP
+  93B5  C9            			RET
                       	
                       	;******* 代替処理用コマンドコード送信 (IN:A コマンドコード) **********
-  93B3                	MCMD:
-  93B3  CDE290        			CALL	SNDBYTE    ;コマンドコード送信
-  93B6  CDCF90        			CALL	RCVBYTE    ;状態取得(00H=OK)
-  93B9  C9            			RET
+  93B6                	MCMD:
+  93B6  CDE290        			CALL	SNDBYTE    ;コマンドコード送信
+  93B9  CDCF90        			CALL	RCVBYTE    ;状態取得(00H=OK)
+  93BC  C9            			RET
                       	
-  93BA                			END
+  93BD                			END
 

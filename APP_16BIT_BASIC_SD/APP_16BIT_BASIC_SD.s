@@ -1,3 +1,5 @@
+;2024.2.22 LOADに時々失敗するため、8088へデータ送信後、WAITルーチンを挿入
+
 LDINF		EQU		0602H		;STARTアドレス、ファイルサイズセット
 GETKY		EQU		0962H		;キーボートから1文字だけAレジスタに取り込む
 PRNT		EQU		09A0H		;AレジスタのASCIIコードを表示
@@ -571,6 +573,7 @@ DBRCV:	CALL	LDINF		;STARTアドレス、転送バイト数をセット
 DBRLOP:	CALL	RCVBYTE		;実データをArduinoから読み込み
 		OUT		(0D4H),A	;8088へ送信
 ;		LD		(HL),A
+		CALL	LOOP
 		DEC		BC
 		LD		A,B
 		OR		C
