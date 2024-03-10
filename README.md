@@ -561,11 +561,15 @@ FDL BASIC S[CR]
 ○ SAVE "TEST"[CR]
 
 ## 操作上の注意
-　「SD-CARD INITIALIZE ERROR」と表示されたときは、SD-CARDをいったん抜き再挿入したうえでArduinoをリセットしてください。
+　~~「SD-CARD INITIALIZE ERROR」と表示されたときは、SD-CARDをいったん抜き再挿入したうえでArduinoをリセットしてください。~~
 
-　SD-CARDにアクセスしていない時に電源が入ったままで SD-CARDを抜いた後、再挿入しSD-CARDにアクセスすると「SD-CARD INITIALIZE ERROR」となる場合があります。再挿入した場合にはSD-CARDにアクセスする前にArduinoを必ずリセットしてください。
+　~~SD-CARDにアクセスしていない時に電源が入ったままで SD-CARDを抜いた後、再挿入しSD-CARDにアクセスすると「SD-CARD INITIALIZE ERROR」となる場合があります。再挿入した場合にはSD-CARDにアクセスする前にArduinoを必ずリセットしてください。~~
 
-　SD-CARDの抜き差しは電源を切った状態で行うほうがより確実です。
+　~~SD-CARDの抜き差しは電源を切った状態で行うほうがより確実です。~~
+
+　(2024.3.10) SD-CARDにアクセスしていない時に電源が入ったままでSD-CARDを抜くと再度SD-CARDを挿入してもSD-CARDにアクセスできない問題を解消しました。(Arduinoを最新版に書き換えてください)
+
+　再度SD-CARDを挿入した後、FDL、LOAD、SAVE等でSD-CARDに3回ほどアクセスすれば復旧します。
 
 　SD-CARDへのセーブ時にDOSファイル名を指定せずに[CR]を押下してしまった場合、「.MZT」というDOSファイルが作成されてしまいます。この「.MZT」はアプリケーションからLOADする時にDOSファイル名を指定せずに[CR]を押下した場合に読み込まれることで不測の動作を起こす原因になるので作成された場合には削除しておく方が無難です。
 
@@ -986,3 +990,7 @@ SDカードは8GB以下が望ましいことを追記。
 2024.2.22
 
 16BIT BASIC 1Z-012 SD対応版でLOADに時々失敗するため、修正
+
+2024.3.10
+
+　電源が入ったままでSD-CARDを抜くと再度SD-CARDを挿入してもSD-CARDにアクセスできない問題を解消した。
