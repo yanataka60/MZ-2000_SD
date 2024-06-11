@@ -940,7 +940,7 @@ https://bugfire2009.ojaru.jp/input.html
 
 　[0070] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 
-MZ-LOGO中からのLOAD、SAVEの使い方は基本的にMZ-LOGOの使い方ですが、LOADコマンドで「LOAD "xxxx」と指定して後に画面では確認できませんが、DOSファイル名待ちになっています。
+MZ-LOGO中からのLOAD、SAVEの使い方は基本的にMZ-LOGOの使い方ですが、LOADコマンドで「LOAD "xxxx」CRと入力した後に画面ではDotの表示と点滅となっていますが、DOSファイル名待ちになっています。
 
 再度xxxxのファイル名を入力し、CRを押してください。
 
