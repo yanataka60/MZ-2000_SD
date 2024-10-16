@@ -708,7 +708,7 @@ DISK BASIC MZ-2Z002を起動し、Filing CMTを使ってカセットテープに
 　次にAPP_BASIC_LISP_SDフォルダ内のAPP_BASIC_LISP_SD_MZ-LISP_80B.bin又はAPP_BASIC_LISP_SD_MZ-LISP_2000.binをMZTアドレス3FA0h(実アドレス3F20h)から付け加えて保存します。(MZTファイル0000h～4530h)
 
 ### S-OS SWORD TAPE版
-MZ-80B版、MZ-2000、MZ-2200版はSDからBOOTしたランチャー用MONITORからFD又はFDLコマンドでLOAD実行すればそのままSD対応となりますが、SDアクセスルーチンを保護するためにS-OSで使用できるメモリの上限を示す#MEMAXR値をSWORDのMZTファイル(MONITORは不要)をバイナリエディタで以下のように修正します。
+MZ-80B版、MZ-2000、MZ-2200版(いづれもMONITORは不要)はSDからBOOTしたランチャー用MONITORからFD又はFDLコマンドでLOAD実行すればそのままSD対応となりますが、SDアクセスルーチンを保護するためにS-OSで使用できるメモリの上限を示す#MEMAXR値をSWORDのMZTファイル(MONITORは不要)をバイナリエディタで以下のように修正します。
 
 |MZT ADDRESS|実ADDRESS|修正前|修正後|
 | ------------ | ------------ | ------------ | ------------ |
