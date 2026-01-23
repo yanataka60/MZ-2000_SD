@@ -957,7 +957,7 @@ MZ-LOGO中からのLOAD、SAVEの使い方は基本的にMZ-LOGOの使い方で�
 また、マニュアルでは確認できなかったのですが「OPEN "xxxx」でセーブファイル名を指定するときに使えない文字が在るようです。エラーが返ってくるようであればファイル名を変えてみてください。
 
 
-### EMMボード for MZ-2000からの起動
+## EMMボード for MZ-2000からの起動
 　拙作EMMボード for MZ-2000はバッテリーバックアップに対応させました。
 
 　https://github.com/yanataka60/EMM_for_MZ-2000
@@ -966,7 +966,7 @@ MZ-LOGO中からのLOAD、SAVEの使い方は基本的にMZ-LOGOの使い方で�
 
 　「/」キーを押しながら電源ON時又はIPLリセットすることでMZ-2000_SDが起動しますが、「/」キーとテンキー「1」～「3」を同時に押しながら電源ON時又はIPLリセットすることで「EMM1」～「EMM3」のHuBASICから起動させることが出来ます。
 
-#### BOOT LOADERをROMに書き込む
+### BOOT LOADERをROMに書き込む
 　EMMフォルダにある「BOOT_A_LOADER.bin」または「BOOT_AB_LOADER.bin」をROMに書き込みます。
 
 　　27256を使用する場合は「BOOT_A_LOADER.bin」を書き込んでください。
