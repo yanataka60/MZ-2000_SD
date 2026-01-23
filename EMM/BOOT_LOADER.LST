@@ -1,0 +1,374 @@
+                                ;*** AILZ80ASM *** Z-80 Assembler, version 1.0.28.0, LST:Full:4
+                                ;2023.6.23 「NOT FOUND @BOOT-x xxxxxxx.bin」にエラーメッセージを修正。
+                                
+                                ;0A0H PORTA 送信データ(下位4ビット)
+                                ;0A1H PORTB 受信データ(8ビット)
+                                ;
+                                ;0A2H PORTC Bit
+                                ;7 IN  CHK
+                                ;6 IN
+                                ;5 IN
+                                ;4 IN 
+                                ;3 OUT
+                                ;2 OUT FLG
+                                ;1 OUT
+                                ;0 OUT
+                                ;
+                                ;0A3H コントロールレジスタ
+                                
+                                
+000000 0000                             ORG     0000H
+                                
+000000 0000 00               4          NOP
+000001 0001 31FF4F          10          LD      SP,4FFFH               ;取り敢えずスタックポインタ設定
+                                        
+000004 0004 DBE0            11          IN      A,(0E0H)               ;MZ-2000、MZ-80Bを判別して初期設定
+000006 0006 FEFF             7          CP      0FFH
+000008 0008 2005            12          JR      NZ,IO0
+00000A 000A 213300          10          LD      HL,IOTBL2000
+00000D 000D 1803            12          JR      IO1
+00000F 000F 215900          10  IO0:    LD      HL,IOTBL80B
+000012 0012 7E               7  IO1:    LD      A,(HL)
+000013 0013 23               6          INC     HL
+000014 0014 4E               7          LD      C,(HL)
+000015 0015 23               6          INC     HL
+000016 0016 ED79            12          OUT     (C),A
+000018 0018 3C               4          INC     A
+000019 0019 20F7            12          JR      NZ,IO1
+00001B 001B CD2400          17          CALL    SYOKI
+00001E 001E 3E0D             7          LD      A,0DH
+000020 0020 D3E3            11          OUT     (0E3H),A
+                                
+000022 0022 1853            12          JR      TENSO                   ;転送プログラムへ
+                                
+000024 0024 DBE0            11  SYOKI:  IN      A,(0E0H)
+000026 0026 FEFF             7          CP      0FFH
+000028 0028 2004            12          JR      NZ,SK1
+00002A 002A 3EFF             7          LD      A,0FFH
+00002C 002C 1802            12          JR      SK2
+00002E 002E 3E12             7  SK1:    LD      A,12H
+000030 0030 D3E0            11  SK2:    OUT     (0E0H),A
+000032 0032 C9              10          RET
+                                
+       0033                     IOTBL2000:
+000033 0033 02E3                        DEFW    0E302H
+000035 0035 34E7                        DEFW    0E734H
+000037 0037 74E7                        DEFW    0E774H
+000039 0039 B4E7                        DEFW    0E7B4H
+00003B 003B 00E6                        DEFW    0E600H
+00003D 003D 00E6                        DEFW    0E600H
+00003F 003F 02E5                        DEFW    0E502H
+000041 0041 00E5                        DEFW    0E500H
+000043 0043 02E4                        DEFW    0E402H
+000045 0045 00E4                        DEFW    0E400H
+000047 0047 CFE9                        DEFW    0E9CFH
+000049 0049 00E9                        DEFW    0E900H
+00004B 004B 40E8                        DEFW    0E840H
+00004D 004D 01F7                        DEFW    0F701H
+00004F 004F 00F6                        DEFW    0F600H
+000051 0051 07F5                        DEFW    0F507H
+000053 0053 00F4                        DEFW    0F400H
+000055 0055 CFEB                        DEFW    0EBCFH
+000057 0057 FFEB                        DEFW    0EBFFH
+                                        
+       0059                     IOTBL80B:
+000059 0059 02E3                        DEFW    0E302H
+00005B 005B 34E7                        DEFW    0E734H
+00005D 005D 74E7                        DEFW    0E774H
+00005F 005F B4E7                        DEFW    0E7B4H
+000061 0061 00E6                        DEFW    0E600H
+000063 0063 00E6                        DEFW    0E600H
+000065 0065 02E5                        DEFW    0E502H
+000067 0067 00E5                        DEFW    0E500H
+000069 0069 02E4                        DEFW    0E402H
+00006B 006B 00E4                        DEFW    0E400H
+00006D 006D CFE9                        DEFW    0E9CFH
+00006F 006F 00E9                        DEFW    0E900H
+000071 0071 00E8                        DEFW    0E800H
+000073 0073 CFEB                        DEFW    0EBCFH
+000075 0075 FFEB                        DEFW    0EBFFH
+                                
+       0077                     TENSO:                                     ;SDからの読み込みプログラムをメモリ後半に転送
+000077 0077 218500          10          LD      HL,MARK1
+00007A 007A 110080          10          LD      DE,MARK2                   ;8000hへ転送
+00007D 007D 01F701          10          LD      BC,MARK3-MARK2-1
+000080 0080 EDB0                        LDIR
+000082 0082 C30080          10          JP      MARK2                      ;8000hへジャンプ
+                                
+       0085                     MARK1:
+000085 8000                             ORG     8000H,MARK1
+                                
+       8000                     MARK2:
+000085 8000 31FF8F          10          LD      SP,8FFFH                   ;スタックポインタ再設定
+000088 8003 DBE0            11          IN      A,(0E0H)                   ;MZ-2000、MZ-80Bを判別して読み込むべきファイルネームを切り替え
+00008A 8005 FEFF             7          CP      0FFH
+00008C 8007 2007            12          JR      NZ,FLG80B
+00008E 8009 3E00             7  FLG2000:LD      A,00H
+000090 800B 21E080          10          LD      HL,FNAME2000
+000093 800E 1806            12          JR      FLG1
+000095 8010 3E01             7  FLG80B: LD      A,01H
+000097 8012 21F480          10          LD      HL,FNAME80B
+00009A 8015 F5              11          PUSH    AF
+                                        
+00009B 8016 DBE8            11  FLG1:   IN      A,(0E8H)
+00009D 8018 E6F0             7          AND     0F0H
+00009F 801A F612             7          OR      12H
+0000A1 801C D3E8            11          OUT     (0E8H),A
+0000A3 801E DBEA            11          IN      A,(0EAH)
+0000A5 8020 CB4F             8          BIT     1,A
+0000A7 8022 280B            12          JR      Z,EMMLOAD1
+0000A9 8024 CB57             8          BIT     2,A
+0000AB 8026 280D            12          JR      Z,EMMLOAD2
+0000AD 8028 CB5F             8          BIT     3,A
+0000AF 802A 280F            12          JR      Z,EMMLOAD3
+0000B1 802C F1              10          POP     AF
+0000B2 802D 1810            12          JR      FLG2
+0000B4 802F 210881          10  EMMLOAD1:LD     HL,FNAMEEMM1
+0000B7 8032 F1              10          POP     AF
+0000B8 8033 180A            12          JR      FLG2
+0000BA 8035 211781          10  EMMLOAD2:LD     HL,FNAMEEMM2
+0000BD 8038 F1              10          POP     AF
+0000BE 8039 1804            12          JR      FLG2
+0000C0 803B 212681          10  EMMLOAD3:LD     HL,FNAMEEMM3
+0000C3 803E F1              10          POP     AF
+                                
+0000C4 803F 32F581          13  FLG2:   LD      (FLG),A
+0000C7 8042 11BF80          10          LD      DE,FNAME
+0000CA 8045 011400          10          LD      BC,20
+0000CD 8048 EDB0                        LDIR
+                                        
+                                ;**** 8255初期化 ****
+                                ;PORTC下位BITをOUTPUT、上位BITをINPUT、PORTBをINPUT、PORTAをOUTPUT
+0000CF 804A 3E8A             7  INIT:   LD      A,8AH
+0000D1 804C D3A3            11          OUT     (0A3H),A
+                                ;出力BITをリセット
+0000D3 804E 3E00             7  INIT2:  LD      A,00H      ;PORTA <- 0
+0000D5 8050 D3A0            11          OUT     (0A0H),A
+0000D7 8052 D3A2            11          OUT     (0A2H),A   ;PORTC <- 0
+                                
+       8054                     START:
+                                
+0000D9 8054 3E95             7          LD      A,95H      ;BOOTコマンド95H
+0000DB 8056 CD8281          17          CALL    STCD       ;コマンドコード送信
+0000DE 8059 A7               4          AND     A          ;00以外ならERROR
+0000DF 805A C29880          10          JP      NZ,ERR
+                                
+0000E2 805D 21BF80          10          LD      HL,FNAME   ;ファイルネーム送信「@BOOT-x.bin」
+0000E5 8060 CD8981          17          CALL    STFS
+0000E8 8063 A7               4          AND     A          ;00以外ならERROR
+0000E9 8064 C29880          10          JP      NZ,ERR
+                                
+0000EC 8067 CD3F81          17          CALL    RCVBYTE    ;状態取得(00H=OK)
+0000EF 806A A7               4          AND     A          ;00以外ならERROR
+0000F0 806B C29880          10          JP      NZ,ERR
+                                
+0000F3 806E 3E06             7          LD      A,06H
+0000F5 8070 32F681          13          LD      (CURX),A
+0000F8 8073 3E0C             7          LD      A,0CH
+0000FA 8075 32F781          13          LD      (CURY),A
+0000FD 8078 21B580          10          LD      HL,MSG1    ;LOADING @BOOT-x.bin表示
+000100 807B CDBC81          17          CALL    STRPR
+                                
+000103 807E CD3F81          17          CALL    RCVBYTE    ;ファイルサイズ下位バイト受信
+000106 8081 5F               4          LD      E,A
+000107 8082 CD3F81          17          CALL    RCVBYTE    ;ファイルサイズ上位バイト受信
+00010A 8085 57               4          LD      D,A
+00010B 8086 210000          10          LD      HL,0000H
+00010E 8089 CD3F81          17  LOP1:   CALL    RCVBYTE    ;ファイルサイズ分データ受信
+000111 808C 77               7          LD      (HL),A
+000112 808D 23               6          INC     HL
+000113 808E E5              11          PUSH    HL
+000114 808F AF               4          XOR     A
+000115 8090 ED52            15          SBC     HL,DE
+000117 8092 E1              10          POP     HL
+000118 8093 20F4            12          JR      NZ,LOP1
+00011A 8095 C30000          10          JP      0000H      ;0000Hからスタート
+                                
+00011D 8098 213581          10  ERR:    LD      HL,MSG2    ;NOT FOUND
+000120 809B 11B580          10          LD      DE,MSG1
+000123 809E 010A00          10          LD      BC,10
+000126 80A1 EDB0                        LDIR
+000128 80A3 3E06             7  ERR2:   LD      A,06H
+00012A 80A5 32F681          13          LD      (CURX),A
+00012D 80A8 3E0C             7          LD      A,0CH
+00012F 80AA 32F781          13          LD      (CURY),A
+000132 80AD 21B580          10          LD      HL,MSG1
+000135 80B0 CDBC81          17          CALL    STRPR
+000138 80B3 18EE            12          JR      ERR2
+                                
+00013A 80B5 4C4F4144494E4720    MSG1:   DB      'LOADING   '
+            2020                
+                                
+000144 80BF 40424F4F542D4120    FNAME:  DB      '@BOOT-A MZ-2000.bin',00H
+            4D5A2D323030302E    
+            62696E00            
+000158 80D3 0000000000000000            DB      00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H,00H
+            0000000000          
+       80E0                     FNAME2000:
+000165 80E0 40424F4F542D4120            DB      '@BOOT-A MZ-2000.bin',00H
+            4D5A2D323030302E    
+            62696E00            
+                                ;       DB      '@BOOT-B MZ-2000.bin',00H             ;27512ならこちらを有効にしてアセンブル
+       80F4                     FNAME80B:
+000179 80F4 40424F4F542D4120            DB      '@BOOT-A MZ-80B.bin',00H,00H
+            4D5A2D3830422E62    
+            696E0000            
+                                ;       DB      '@BOOT-B MZ-80B.bin',00H,00H          ;27512ならこちらを有効にしてアセンブル
+       8108                     FNAMEEMM1:
+00018D 8108 40424F4F542D454D            DB      '@BOOT-EMM1.bin',00H
+            4D312E62696E00      
+                                
+       8117                     FNAMEEMM2:
+00019C 8117 40424F4F542D454D            DB      '@BOOT-EMM2.bin',00H
+            4D322E62696E00      
+                                
+       8126                     FNAMEEMM3:
+0001AB 8126 40424F4F542D454D            DB      '@BOOT-EMM3.bin',00H
+            4D332E62696E00      
+                                
+0001BA 8135 4E4F5420464F554E    MSG2:   DB      'NOT FOUND '
+            4420                
+                                
+                                ;**** 1BYTE受信 ****
+                                ;受信DATAをAレジスタにセットしてリターン
+       813F                     RCVBYTE:
+0001C4 813F CD7481          17          CALL    F1CHK      ;PORTC BIT7が1になるまでLOOP
+0001C7 8142 DBA1            11          IN      A,(0A1H)   ;PORTB -> A
+0001C9 8144 F5              11          PUSH    AF
+0001CA 8145 3E05             7          LD      A,05H
+0001CC 8147 D3A3            11          OUT     (0A3H),A    ;PORTC BIT2 <- 1
+0001CE 8149 CD7B81          17          CALL    F2CHK      ;PORTC BIT7が0になるまでLOOP
+0001D1 814C 3E04             7          LD      A,04H
+0001D3 814E D3A3            11          OUT     (0A3H),A    ;PORTC BIT2 <- 0
+0001D5 8150 F1              10          POP     AF
+0001D6 8151 C9              10          RET
+                                        
+                                ;**** 1BYTE送信 ****
+                                ;Aレジスタの内容をPORTA下位4BITに4BITずつ送信
+       8152                     SNDBYTE:
+0001D7 8152 F5              11          PUSH    AF
+0001D8 8153 1F               4          RRA
+0001D9 8154 1F               4          RRA
+0001DA 8155 1F               4          RRA
+0001DB 8156 1F               4          RRA
+0001DC 8157 E60F             7          AND     0FH
+0001DE 8159 CD6381          17          CALL    SND4BIT
+0001E1 815C F1              10          POP     AF
+0001E2 815D E60F             7          AND     0FH
+0001E4 815F CD6381          17          CALL    SND4BIT
+0001E7 8162 C9              10          RET
+                                
+                                ;**** 4BIT送信 ****
+                                ;Aレジスタ下位4ビットを送信する
+       8163                     SND4BIT:
+0001E8 8163 D3A0            11          OUT     (0A0H),A
+0001EA 8165 3E05             7          LD      A,05H
+0001EC 8167 D3A3            11          OUT     (0A3H),A    ;PORTC BIT2 <- 1
+0001EE 8169 CD7481          17          CALL    F1CHK      ;PORTC BIT7が1になるまでLOOP
+0001F1 816C 3E04             7          LD      A,04H
+0001F3 816E D3A3            11          OUT     (0A3H),A    ;PORTC BIT2 <- 0
+0001F5 8170 CD7B81          17          CALL    F2CHK
+0001F8 8173 C9              10          RET
+                                        
+                                ;**** BUSYをCHECK(1) ****
+                                ; 82H BIT7が1になるまでLOP
+0001F9 8174 DBA2            11  F1CHK:  IN      A,(0A2H)
+0001FB 8176 E680             7          AND     80H        ;PORTC BIT7 = 1?
+0001FD 8178 28FA            12          JR      Z,F1CHK
+0001FF 817A C9              10          RET
+                                
+                                ;**** BUSYをCHECK(0) ****
+                                ; 82H BIT7が0になるまでLOOP
+000200 817B DBA2            11  F2CHK:  IN      A,(0A2H)
+000202 817D E680             7          AND     80H        ;PORTC BIT7 = 0?
+000204 817F 20FA            12          JR      NZ,F2CHK
+000206 8181 C9              10          RET
+                                
+                                ;**** コマンド送信 (IN:A コマンドコード)****
+000207 8182 CD5281          17  STCD:   CALL    SNDBYTE    ;Aレジスタのコマンドコードを送信
+00020A 8185 CD3F81          17          CALL    RCVBYTE    ;状態取得(00H=OK)
+00020D 8188 C9              10          RET
+                                
+                                ;**** ファイルネーム送信(IN:HL ファイルネームの先頭) ******
+00020E 8189 0620             7  STFS:   LD      B,20H
+000210 818B 7E               7  STFS1:  LD      A,(HL)     ;FNAME送信
+000211 818C CD5281          17          CALL    SNDBYTE
+000214 818F 23               6          INC     HL
+000215 8190 05               4          DEC     B
+000216 8191 20F8            12          JR      NZ,STFS1
+000218 8193 3E0D             7          LD      A,0DH
+00021A 8195 CD5281          17          CALL    SNDBYTE
+00021D 8198 CD3F81          17          CALL    RCVBYTE    ;状態取得(00H=OK)
+000220 819B C9              10          RET
+                                
+                                ;V-RAM アクセスON
+000221 819C F5              11  VRAMON: PUSH    AF
+000222 819D DBE8            11          IN      A,(0E8H)
+000224 819F F5              11          PUSH    AF
+000225 81A0 3AF581          13          LD      A,(FLG)
+000228 81A3 FE01             7          CP      01H
+00022A 81A5 2804            12          JR      Z,VO1
+00022C 81A7 06C0             7          LD      B,0C0H
+00022E 81A9 1802            12          JR      VO2
+000230 81AB 0680             7  VO1:    LD      B,80H
+000232 81AD F1              10  VO2:    POP     AF
+000233 81AE B0               4          OR      B
+000234 81AF D3E8            11          OUT     (0E8H),A
+000236 81B1 F1              10          POP     AF
+000237 81B2 C9              10          RET
+                                
+                                ;V-RAMアクセスOFF
+000238 81B3 F5              11  VRAMOF: PUSH    AF
+000239 81B4 DBE8            11          IN      A,(0E8H)
+00023B 81B6 E67F             7          AND     7FH
+00023D 81B8 D3E8            11          OUT     (0E8H),A
+00023F 81BA F1              10          POP     AF
+000240 81BB C9              10          RET
+                                
+                                ;文字列を表示
+000241 81BC 7E               7  STRPR:  LD      A,(HL)
+000242 81BD FE00             7          CP      00H
+000244 81BF C8              11          RET     Z
+000245 81C0 CDC681          17          CALL    PRINT
+000248 81C3 23               6          INC     HL
+000249 81C4 18F6            12          JR      STRPR
+                                
+                                ;Aレジスタの内容をASCIIコードとしてCURX,Yの位置に表示
+00024B 81C6 E5              11  PRINT:  PUSH    HL
+00024C 81C7 F5              11          PUSH    AF
+00024D 81C8 CDDC81          17          CALL    CALXY
+000250 81CB F1              10          POP     AF
+000251 81CC CD9C81          17          CALL    VRAMON
+000254 81CF 77               7          LD      (HL),A
+000255 81D0 CD9C81          17          CALL    VRAMON
+000258 81D3 3AF681          13          LD      A,(CURX)
+00025B 81D6 3C               4          INC     A
+00025C 81D7 32F681          13          LD      (CURX),A
+00025F 81DA E1              10          POP     HL
+000260 81DB C9              10          RET
+                                        
+                                ;CURX,YからV-RAMアドレスを算出
+000261 81DC D5              11  CALXY:  PUSH    DE
+000262 81DD C5              11          PUSH    BC
+000263 81DE 21D8CF          10          LD      HL,0D000H-28H
+000266 81E1 3AF781          13          LD      A,(CURY)
+000269 81E4 3C               4          INC     A
+00026A 81E5 47               4          LD      B,A
+00026B 81E6 1600             7          LD      D,00H
+00026D 81E8 1E28             7          LD      E,28H
+00026F 81EA 19              11  CALXY1: ADD     HL,DE
+000270 81EB 10FD            13          DJNZ    CALXY1
+000272 81ED 3AF681          13          LD      A,(CURX)
+000275 81F0 5F               4          LD      E,A
+000276 81F1 19              11          ADD     HL,DE
+000277 81F2 C1              10          POP     BC
+000278 81F3 D1              10          POP     DE
+000279 81F4 C9              10          RET
+                                        
+00027A 81F5 00                  FLG:    DB      00H
+00027B 81F6 00                  CURX:   DB      00H
+00027C 81F7 00                  CURY:   DB      00H
+                                
+       81F8                     MARK3:
+                                        END
+[EOF:BOOT_LOADER.S:SHIFT_JIS]

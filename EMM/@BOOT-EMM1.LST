@@ -1,0 +1,57 @@
+﻿                                ;*** AILZ80ASM *** Z-80 Assembler, version 1.0.28.0, LST:Full:4
+       00A4                     EMM     EQU     0A4H
+                                
+                                
+000000 0000                             ORG     0000H
+                                
+000000 0000 210E00          10          LD      HL,ST1
+000003 0003 1100C0          10          LD      DE,ST2
+000006 0006 013400          10          LD      BC,ST3-ST2
+000009 0009 EDB0                        LDIR
+00000B 000B C300C0          10          JP      ST2
+                                
+                                
+       000E                     ST1:
+00000E C000                             ORG     C000H,ST1
+       C000                     ST2:
+00000E C000 AF               4          XOR     A
+00000F C001 D3A4            11          OUT     (EMM),A
+000011 C003 D3A5            11          OUT     (EMM+1),A
+000013 C005 D3A6            11          OUT     (EMM+2),A
+                                        
+000015 C007 0612             7          LD      B,12H
+000017 C009 DBA7            11  LOP1:   IN      A,(EMM+3)
+000019 C00B 10FC            13          DJNZ    LOP1
+                                
+00001B C00D DBA7            11          IN      A,(EMM+3)
+00001D C00F 5F               4          LD      E,A
+00001E C010 DBA7            11          IN      A,(EMM+3)
+000020 C012 57               4          LD      D,A
+                                        
+000021 C013 060A             7          LD      B,0AH
+000023 C015 DBA7            11  LOP2:   IN      A,(EMM+3)
+000025 C017 10FC            13          DJNZ    LOP2
+                                
+000027 C019 DBA7            11          IN      A,(EMM+3)
+000029 C01B 67               4          LD      H,A
+                                
+00002A C01C AF               4          XOR     A
+00002B C01D D3A4            11          OUT     (EMM),A
+00002D C01F 7C               4          LD      A,H
+00002E C020 D3A5            11          OUT     (EMM+1),A
+000030 C022 AF               4          XOR     A
+000031 C023 D3A6            11          OUT     (EMM+2),A
+                                
+000033 C025 210000          10          LD      HL,0000H
+000036 C028 DBA7            11  EMLOP:  IN      A,(EMM+3)
+000038 C02A 77               7          LD      (HL),A
+000039 C02B 23               6          INC     HL
+00003A C02C 1B               6          DEC     DE
+00003B C02D 7A               4          LD      A,D
+00003C C02E B3               4          OR      E
+00003D C02F 20F7            12          JR      NZ,EMLOP
+00003F C031 C30000          10          JP      0000H
+       C034                     ST3:
+                                
+                                        END
+[EOF:@BOOT-EMM1.S:UTF_8]
