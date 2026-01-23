@@ -964,6 +964,8 @@ MZ-LOGO中からのLOAD、SAVEの使い方は基本的にMZ-LOGOの使い方で�
 
 　「/」キーを押しながら電源ON時又はIPLリセットすることでMZ-2000_SDが起動しますが、「/」キーとテンキー「1」～「3」を同時に押しながら電源ON時又はIPLリセットすることで「EMM1」～「EMM3」のHuBASICから起動させることが出来ます。
 
+　なお、EMMの内容をチェックしていないのでEMMが起動可能な内容(HuBASIC起動イメージ)でなかった場合には暴走します。
+
 ### BOOT LOADERをROMに書き込む
 　EMMフォルダにある「BOOT_A_LOADER.bin」または「BOOT_AB_LOADER.bin」をROMに書き込みます。
 
@@ -978,8 +980,6 @@ MZ-LOGO中からのLOAD、SAVEの使い方は基本的にMZ-LOGOの使い方で�
 　起動させたいEMMにはDISK版HuBASICの「Utility」から「2...COPY ALL」を使ってDISK版HuBASICをコピーします。
 
 　実機にFDDを繋いでEMMにコピーしてもよいですが、エミュレーター上でDISK版HuBASICのEMMのイメージを作成し、EMMMENUのEMMLOADでEMMに書き込む方法もあります。
-
-　なお、EMMの内容をチェックしていないのでEMMの内容がHuBASICでなかった場合には暴走します。
 
 ## 謝辞
 　基板の作成に当たり以下のデータを使わせていただきました。ありがとうございました。
