@@ -56,7 +56,13 @@
 　なお、Arduino、ROMへ書き込むための機器が別途必要となります。
 
 ## 回路図
-　MZ-2000_SDは、インタフェース基板とSD-CARD UNIT基板の2枚構成となっています。
+　2枚構成のRev2.3(Rev3.3)と1枚構成のRev4.3があります。
+
+　Rev2.3(Rev3.3)は手元にSD-CARDが置ける、拡張ボックスが無くてもMZ-2000に装着が可能です。
+
+　Rev4.3は拡張ボックス専用でSD-CARDが背面にいってしまいますが、すっきりと収納できます。
+
+　好きな方を選択してください。
 
 　注1)MZ-2000_SD(SD-CARD UNIT基板)でU5 GAL22V10をTTLに置き換えたRev3.3基板のKiCadデータを追加しました。後述「MZ-2000_SD(SD-CARD UNIT基板)Rev3.3」を参照してください。
 
@@ -66,7 +72,7 @@
 
 [インタフェース基板回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_EXT-BOARD/MZ-2000_EXT-BOARD.pdf)
 ![EXT-BOARD](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ-2000_EXT-BOARD_schematic.jpg)
-[SD-CARD UNIT基板回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_SD/MZ2000_SD.pdf)
+[SD-CARD UNIT Rev2.3基板回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_SD/MZ2000_SD.pdf)
 ![MZ-2000_SD](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_schematic.jpg)
 ## 部品
 
@@ -78,7 +84,7 @@
 |J5|2x22Pinコネクタ|1|秋月電子通商 PH-2x40RGなど(EXPANSION UNITを使う場合には必要ありません)|
 |S1|3Pスライドスイッチ|1|秋月電子通商 SS12D01G4など|
 
-### MZ-2000_SD(SD-CARD UNIT基板)Rev2.x
+### MZ-2000_SD(SD-CARD UNIT基板)Rev2.3
 |番号|品名|数量|備考|
 | ------------ | ------------ | ------------ | ------------ |
 |J1|2x22Pinコネクタ|1|秋月電子通商 PH-2x40RGなど|
@@ -104,7 +110,7 @@
 　　　注3)Arduino等に使われる5V電源に対応したMicroSD Card Adapterも正しく信号を繋げば使えるとご報告いただきました。
 
 ### MZ-2000_SD(SD-CARD UNIT基板)Rev3.3
-　MZ-2000_SD(SD-CARD UNIT基板)Rev2.xのU5 GAL22V10が以下の部品に置き換わっています。以下の部品以外はMZ-2000_SD(SD-CARD UNIT基板)Rev2.xの説明を参照してください。
+　MZ-2000_SD(SD-CARD UNIT基板)Rev2.3のU5 GAL22V10が以下の部品に置き換わっています。以下の部品以外はMZ-2000_SD(SD-CARD UNIT基板)Rev2.3の説明を参照してください。
 |番号|品名|数量|備考|
 | ------------ | ------------ | ------------ | ------------ |
 |U5 U7|74LS04|2||
@@ -113,7 +119,7 @@
 |C8-C11|積層セラミックコンデンサ 0.1uF|4||
 
 #### Rev3.3回路図
-[SD-CARD UNIT基板回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_SD_3_3/MZ2000_SD_33.pdf)
+[SD-CARD UNIT基板Rev3.3回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_SD_3_3/MZ2000_SD_33.pdf)
 ![MZ-2000_SD](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_33_schematic.jpg)
 ![Rev3.3](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_33.jpg)
 
@@ -122,7 +128,7 @@
 
 　MZ-2000、MZ-2200ならEXPANSION UNIT、MZ-80Bなら拡張I/Oポート、MZ-2500なら拡張ユニットが必要です。
 
-　MZ-2000_SD(SD-CARD UNIT基板)Rev2.xのU5 GAL22V10がTTLに置き換わっています。
+　MZ-2000_SD(SD-CARD UNIT基板)Rev2.3のU5 GAL22V10がTTLに置き換わっています。
 
 　また、J1はカードエッジになっていますので「2x22Pinコネクタ」は必要なく、EXT-BOARDを必要としないのでフラットケーブルも不要です。
 
@@ -153,7 +159,7 @@
 
 
 #### Rev4.3回路図
-[SD-CARD UNIT基板回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_SD_4_3/MZ2000_SD_43.pdf)
+[SD-CARD UNIT基板Rev4.3回路図](https://github.com/yanataka60/MZ-2000_SD/blob/main/KiCad/MZ-2000_SD_4_3/MZ2000_SD_43.pdf)
 ![MZ-2000_SD](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_43_schematic.jpg)
 ![Rev4.3(1)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_43(1).JPG)
 ![Rev4.3(2)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_43(2).JPG)
@@ -174,19 +180,6 @@ MicroSD Card Adapterについているピンヘッダを除去してハンダ付
 
 ![MicroSD Card Adapter4](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MicroSD%20Card%20Adapter(4).JPG)
 
-
-### MicroSD Card Adapterを使う(Rev2.2)
-以下のピン番号を参考に変換基板等繋ぎ方は適宜対応してください。
-|AE-microSD-LLCNVピン番号|MicroSD Card Adapterピン番号|信号名|
-| ---------------------- | -------------------------- | ---- |
-|1|2|5V|
-|4|1|GND|
-|5|5|SCK|
-|6|3|MISO|
-|7|4|MOSI|
-|8|6|CS|
-
-![MicroSD Card Adapter](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MicroSD%20Card%20Adapter.jpg)
 
 ### その他必要なもの
 　基板のコネクタは2x22Pinで設計していますが、2.54mmピッチ2x22Pinフラットケーブルが手に入りにくいので2.54mmピッチ2x25Pinフラットケーブルで代用しています。
@@ -1112,3 +1105,7 @@ SDカードは8GB以下が望ましいことを追記。
 2026.1.23
 
 　MZ-2000_SD起動時にEMMにあるHuBASICからも起動可能なBOOT PROGRAMを公開しました。
+
+2026.8.16
+
+　Rev2.3(Rev3.3)とRev4.3の違いを整理しました。
