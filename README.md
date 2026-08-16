@@ -1,6 +1,8 @@
 # MZ-80B、MZ-2000、MZ-2200にSD-CARDからのアプリケーション起動、ロード、セーブ機能
 
 ![MZ-2000_SD](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/TITLE.jpg)
+![MZ-2000_SD2](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/TITLE2.jpg)
+
 
 　MZ-80B、MZ-2000、MZ-2200でSD-CARDからのアプリケーション起動、BASICなどのアプリケーションからSD-CARDへのロード、セーブを実現するものです。
 
