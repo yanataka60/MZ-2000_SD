@@ -165,7 +165,7 @@
 ![Rev4.3(2)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_43(2).JPG)
 ![Rev4.3(3)](https://github.com/yanataka60/MZ-2000_SD/blob/main/JPEG/MZ2000_SD_43(3).JPG)
 
-### MicroSD Card Adapterを使う(Rev2.3 Rev3.3)
+### MicroSD Card Adapterを使う
 J3に取り付けます。
 
 MicroSD Card Adapterについているピンヘッダを除去してハンダ付けするのが一番確実ですが、J3の穴にMicroSD Card Adapterをぴったりと押しつけ、裏から多めにハンダを流し込むことでハンダ付けをする方法もあります。なお、この方法の時にはしっかりハンダ付けが出来たかテスターで導通を確認しておいた方が安心です。
